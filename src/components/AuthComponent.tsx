@@ -64,7 +64,7 @@ const AuthComponent = (props) => {
     }
   } = useForm({
     resolver: zodResolver(authSchema),
-    mode: 'onChange'
+    mode: 'onSubmit'
   })
   
   const onSubmit = useCallback(({email, password}) => {
