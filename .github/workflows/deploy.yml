@@ -14,13 +14,13 @@ jobs:
           envVariableKeys: APP_SECRET,DATABASE_URL,MIGRATE_DATABASE_URL
         env:
           APP_SECRET: ${{ secrets.APP_SECRET }}
-          TARGET_APP_SECRET: preview,development,production
+          TARGET_APP_SECRET: production
           TYPE_APP_SECRET: encrypted
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          TARGET_MDATABASE_URL: preview,development,production
+          TARGET_MDATABASE_URL: production
           TYPE_DATABASE_URL: encrypted
           MIGRATE_DATABASE_URL: ${{ secrets.MIGRATE_DATABASE_URL }}
-          TARGET_MIGRATE_DATABASE_URL: preview,development,production
+          TARGET_MIGRATE_DATABASE_URL: production
           TYPE_MIGRATE_DATABASE_URL: encrypted
       # deploy app to vercel
       - name: deploy site to vercel
