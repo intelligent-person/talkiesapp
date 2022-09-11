@@ -17,7 +17,7 @@ jobs:
           TARGET_APP_SECRET: production
           TYPE_APP_SECRET: encrypted
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          TARGET_MDATABASE_URL: production
+          TARGET_DATABASE_URL: production
           TYPE_DATABASE_URL: encrypted
           MIGRATE_DATABASE_URL: ${{ secrets.MIGRATE_DATABASE_URL }}
           TARGET_MIGRATE_DATABASE_URL: production
