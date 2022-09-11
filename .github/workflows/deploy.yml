@@ -11,6 +11,7 @@ jobs:
         with:
           token: ${{ secrets.VERCEL_TOKEN }}
           projectName: talkiesapp # project name in Vercel
+          envVariableKeys: APP_SECRET,DATABASE_URL,MIGRATE_DATABASE_URL
         env:
           APP_SECRET: ${{ secrets.APP_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
