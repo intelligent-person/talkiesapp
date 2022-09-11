@@ -1,6 +1,6 @@
-import { css, keyframes } from '@emotion/react';
+import { css, keyframes } from '@emotion/react'
 
-export const animationDuration = '.5s';
+export const animationDuration = '.5s'
 
 export const animated = css`
   animation-duration: ${animationDuration};
@@ -11,7 +11,7 @@ export const animated = css`
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
   }
-`;
+`
 
 export const fadeInAnimation = keyframes`
   from {
@@ -21,13 +21,13 @@ export const fadeInAnimation = keyframes`
   to {
     opacity: 1;
   }
-`;
+`
 
 export const fadeIn = css`
   animation: ${fadeInAnimation};
 
   ${animated}
-`;
+`
 
 export const fadeOutAnimation = keyframes`
   from {
@@ -37,10 +37,10 @@ export const fadeOutAnimation = keyframes`
   to {
     opacity: 0;
   }
-`;
+`
 
 export const fadeOut = css`
   animation: ${fadeOutAnimation};
 
   ${animated}
-`;
+`

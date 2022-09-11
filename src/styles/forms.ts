@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
-import {filterProperties} from "./helpers";
+import styled from '@emotion/styled'
+import { filterProperties } from './helpers'
+import { css } from '@emotion/react'
 
 export const Input = styled('input')`
   width: 100%;
@@ -14,7 +15,7 @@ export const Input = styled('input')`
     transition: all 5000s ease-in-out 0s;
   }
 
-  ${({theme}) => `
+  ${({ theme }) => css`
     background: ${theme.forms.input.background};
     border-radius: ${theme.forms.input.borderRadius};
     padding: ${theme.forms.input.padding};
@@ -48,28 +49,28 @@ export const Input = styled('input')`
 export const Textarea = styled('textarea')``
 
 export const Label = styled('label')`
-  ${({theme}) => `
+  ${({ theme }) => `
     font-family: ${theme.fontFamily};
   `}
 `
 
-interface FormGroupProps {
+interface FormGroupProperties {
   invalid?: boolean
 }
 
-const FormGroupForwardProps = new Set([
-  'invalid',
+const FormGroupForwardProperties = new Set([
+  'invalid'
 ])
 
 export const FormGroup = styled('div', {
-  shouldForwardProp: filterProperties(FormGroupForwardProps)
-})<FormGroupProps>`
+  shouldForwardProp: filterProperties(FormGroupForwardProperties)
+})<FormGroupProperties>`
   position: relative;
   margin-bottom: 35px;
 
   ${Label} {
     position: absolute;
-    top: -20px;
+    top: -15px;
     left: 37px;
     padding: 5px 8px;
     background: #FFFFFF;
@@ -101,10 +102,17 @@ export const FormGroup = styled('div', {
     color: #232323;
   }
 
-  ${({invalid}) => invalid && `
+  ${Input}:not(:focus) + ${Label} {
+    opacity: 0 !important;
+    top: 15px;
+    left: 25px;
+  }
+
+  ${({ invalid }) => invalid && css`
      ${Input},
      ${Input}:not(:placeholder-shown:not(:focus)) {
         color: rgba(185, 52, 52, 1) !important;
+        background: #FFFFFF !important;
      }
      
      ${Input}::placeholder {
@@ -122,13 +130,14 @@ export const FormGroup = styled('div', {
         color: rgba(185, 52, 52, 1) !important;
      }
   `}
+  
   ${Textarea}:placeholder-shown::placeholder,
   ${Input}:placeholder-shown::placeholder {
     opacity: 0;
     color: #000000;
 
-    ${({invalid}) => invalid && `opacity: 1;`
-    };
+    ${({ invalid }) => invalid && 'opacity: 1;'
+};
   }
 
 `

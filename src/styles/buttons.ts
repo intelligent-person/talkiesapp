@@ -1,17 +1,17 @@
-import styled from "@emotion/styled";
-import {filterProperties} from "./helpers";
+import styled from '@emotion/styled'
+import { filterProperties } from './helpers'
 
-interface NavProps {
+interface NavProperties {
   withImage?: boolean
 }
 
-const NavForwardProps = new Set([
+const NavForwardProperties = new Set([
   'withImage'
 ])
 
 export const Nav = styled('a', {
-  shouldForwardProp: filterProperties(NavForwardProps)
-})<NavProps>`
+  shouldForwardProp: filterProperties(NavForwardProperties)
+})<NavProperties>`
   font-weight: 500;
   font-size: 22px;
   padding: 5px;
@@ -26,36 +26,37 @@ export const Nav = styled('a', {
     border-image: linear-gradient(to right, rgba(231, 231, 231, 0), rgba(231, 231, 231, 1), rgba(231, 231, 231, 0)) 100% 0;
   }
   
-  ${({theme}) => `
+  ${({ theme }) => `
     color: ${theme.colors.primary};
     font-family: ${theme.fontFamily};
   `}
   
-  ${({withImage}) => withImage && `
+  ${({ withImage }) => withImage && `
     display: flex;
+    padding: 0;
     width: fit-content;
     align-items: center;
     margin: 0 auto;
   `}
 `
 
-interface ButtonProps {
+interface ButtonProperties {
   primary?: boolean
   secondary?: boolean
 }
 
-const ButtonForwardProps = new Set([
+const ButtonForwardProperties = new Set([
   'primary',
   'secondary'
 ])
 
 export const Button = styled('button', {
-  shouldForwardProp: filterProperties(ButtonForwardProps)
-})<ButtonProps>`
+  shouldForwardProp: filterProperties(ButtonForwardProperties)
+})<ButtonProperties>`
   border: none;
   cursor: pointer;
   transition: all .2s linear;
-  font-family: ${({theme}) => theme.fontFamily};
+  font-family: ${({ theme }) => theme.fontFamily};
 
   :focus-visible {
     outline: none;
@@ -73,15 +74,18 @@ export const Button = styled('button', {
       padding: ${theme.buttons.primary.sizes.default.padding};
       font-size: ${theme.buttons.primary.sizes.default.fontSize};
       font-weight: ${theme.buttons.primary.sizes.default.fontWeight};
+      border: ${theme.buttons.primary.border};
       
       :hover, :focus-visible {
         background: ${theme.buttons.primary.hover.background};
         filter: ${theme.buttons.primary.hover.filter};
         boxShadow: ${theme.buttons.primary.hover.boxShadow};
+        border: ${theme.buttons.primary.hover.border};
       }
       
       :active {
         background: ${theme.buttons.primary.active.background};
+        border: ${theme.buttons.primary.active.border};
       }
   `}
   
