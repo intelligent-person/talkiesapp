@@ -3,17 +3,13 @@
 
 
 type AuthPayload {
-  token: String!
-  user: User!
-}
-
-type LogoutPayload {
-  success: Boolean!
+  token: String
+  user: User
 }
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload
-  logout: LogoutPayload
+  logout: AuthPayload
   signup(email: String!, name: String!, password: String!): AuthPayload
 }
 
