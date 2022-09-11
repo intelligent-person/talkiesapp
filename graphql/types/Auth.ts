@@ -1,21 +1,16 @@
-import {nonNull, objectType, stringArg} from "nexus";
+import {nonNull, nullable, objectType, stringArg} from "nexus";
 import {Context} from "../context/context";
 import {compare, hash} from "bcryptjs";
-import {sign, } from "jsonwebtoken";
+import {sign,} from "jsonwebtoken";
+import {ApolloError} from "apollo-server-micro";
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition(t) {
-    t.nonNull.string('token')
-    t.nonNull.field('user', {
+    t.string('token')
+    t.field('user', {
       type: "User",
     })
-  },
-})
-export const LogoutPayload = objectType({
-  name: 'LogoutPayload',
-  definition(t) {
-    t.nonNull.boolean('success')
   },
 })
 
@@ -49,17 +44,22 @@ export const Mutation = objectType({
       async resolve(_, args, ctx: Context) {
         const password = await hash(args.password, 10);
         const existUser = await ctx.prisma.user.findUnique({
-          where: { email: args.email },
+          where: {email: args.email},
         });
-        if(existUser) {
-          throw new Error('User already exists')
+        if (existUser) {
+          throw new ApolloError(
+            'User already exists',
+            '401',
+            {
+              name: 'email'
+            })
         }
         const user = await ctx.prisma.user.create({
-          data: { ...args, password },
+          data: {...args, password},
         });
-        const token = sign({ userId: user.id }, process.env.APP_SECRET);
+        const token = sign({userId: user.id}, process.env.APP_SECRET);
         ctx.setCookies('token', token)
-  
+        
         return {
           token,
           user,
@@ -78,15 +78,25 @@ export const Mutation = objectType({
         });
         
         if (!user) {
-          throw new Error("No such user found");
+          throw new ApolloError(
+            "No such user found",
+            '401',
+            {
+              name: 'email'
+            })
         }
         
         const valid = await compare(args.password, user.password);
         if (!valid) {
-          throw new Error("Invalid password");
+          throw new ApolloError(
+            'Invalid password',
+            '401',
+            {
+              name: 'password'
+            })
         }
         
-        const token = sign({ userId: user.id }, process.env.APP_SECRET,/*{ expiresIn: 86400 * 30 }*/);
+        const token = sign({userId: user.id}, process.env.APP_SECRET,/*{ expiresIn: 86400 * 30 }*/);
         ctx.setCookies('token', token)
         
         return {
@@ -96,7 +106,7 @@ export const Mutation = objectType({
       }
     })
     t.field('logout', {
-      type: 'LogoutPayload',
+      type: 'AuthPayload',
       args: {},
       async resolve(_, args, ctx: Context) {
         ctx.setCookies('token', '', {
@@ -104,13 +114,8 @@ export const Mutation = objectType({
           path: '/',
         })
         ctx.currentUser = null
-        if(!ctx.currentUser) {
-          return {
-            success: true
-          }
-        }
-        else return {
-          success: false
+        return {
+          user: null
         }
       }
     })
