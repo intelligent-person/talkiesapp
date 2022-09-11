@@ -5,6 +5,7 @@ const GET_GREETING = gql`
         me {
             id
             name
+            email
         }
     }
 `;

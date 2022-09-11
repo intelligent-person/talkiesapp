@@ -24,7 +24,7 @@ function Home() {
   
   return (
     <div>
-      <H1>Welcome back, {currentUser?.name}</H1>
+      <H1>Welcome back, {currentUser?.email}</H1>
       
       
       <Button
