@@ -107,13 +107,17 @@ export const FormGroup = styled('div', {
         color: rgba(185, 52, 52, 1) !important;
      }
      
+     ${Input}::placeholder {
+       color: rgba(185, 52, 52, 1) !important;
+     }
+     
      ${Label}.valid {
        opacity: 0 !important;
      }
      
      ${Label}.invalid {
         opacity: 1 !important;
-        top: 40px !important;
+        top: 43px !important;
         box-shadow: inset 0px -2.99387px 1.49693px rgba(0, 0, 0, 0.25);
         color: rgba(185, 52, 52, 1) !important;
      }

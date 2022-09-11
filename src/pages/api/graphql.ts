@@ -18,6 +18,7 @@ export default cors(async function handler(req, res) {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://studio.apollographql.com",
+    "https://talkiesapp.vercel.app/",
     "http://localhost:3000/",
   );
   res.setHeader(

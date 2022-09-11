@@ -28,6 +28,8 @@ import {errorName} from "../helpers";
 import {useAuth} from "../hooks/useAuth";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {authSchema} from "../validation";
 
 const captions = {
   login: {
@@ -61,11 +63,12 @@ const AuthComponent = (props) => {
       errors
     }
   } = useForm({
-    mode: 'onChange'
+    resolver: zodResolver(authSchema),
+    mode: 'onSubmit'
   })
   
-  const onSubmit = useCallback(async ({email, password}) => {
-    await mutation({
+  const onSubmit = useCallback(({email, password}) => {
+    mutation({
       variables: {
         email,
         password
