@@ -102,7 +102,7 @@ export const FormGroup = styled('div', {
     color: #232323;
   }
 
-  ${Input}:not(:focus) + ${Label} {
+  ${Input}:not(:placeholder-shown):not(:focus) + ${Label} {
     opacity: 0 !important;
     top: 15px;
     left: 25px;
