@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
-import { filterProperties } from './helpers'
-import { css } from '@emotion/react'
+import styled from '@emotion/styled';
+import { filterProperties } from './helpers';
+import { css } from '@emotion/react';
 
 export const Input = styled('input')`
   width: 100%;
@@ -44,15 +44,15 @@ export const Input = styled('input')`
       color: ${theme.forms.input.focus.color} !important;
     }
   `}
-`
+`;
 
-export const Textarea = styled('textarea')``
+export const Textarea = styled('textarea')``;
 
 export const Label = styled('label')`
   ${({ theme }) => `
     font-family: ${theme.fontFamily};
   `}
-`
+`;
 
 interface FormGroupProperties {
   invalid?: boolean
@@ -60,7 +60,7 @@ interface FormGroupProperties {
 
 const FormGroupForwardProperties = new Set([
   'invalid'
-])
+]);
 
 export const FormGroup = styled('div', {
   shouldForwardProp: filterProperties(FormGroupForwardProperties)
@@ -140,4 +140,4 @@ export const FormGroup = styled('div', {
 };
   }
 
-`
+`;

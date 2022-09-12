@@ -1,19 +1,20 @@
-import { GridColumn, GridRow } from 'emotion-flex-grid'
-import { css } from '@emotion/react'
-import { alignItems, Button, flex, fontWeight, FormGroup, gridGap, H1, H4, H6, Input, justifyContent, Label, mb, Nav, uppercase, width } from '../styles'
-import Google from 'public/img/icons/google.svg'
-import Github from 'public/img/icons/github.svg'
-import ArrowRight from 'public/img/icons/arrow_right.svg'
-import Image from 'next/image'
-import { useForm } from 'react-hook-form'
-import { ErrorMessage } from '@hookform/error-message'
-import { FC, useCallback, useEffect } from 'react'
-import { errorName } from '../helpers'
-import { useAuth } from '../hooks/useAuth'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { authSchema } from '../validation'
+import { GridColumn, GridRow } from 'emotion-flex-grid';
+import { css } from '@emotion/react';
+import { alignItems, Button, flex, fontWeight, FormGroup, gridGap, H1, H4, H6, Input, justifyContent, Label, mb, Nav, uppercase, width } from '../styles';
+import Google from 'public/img/icons/google.svg';
+import Github from 'public/img/icons/github.svg';
+import ArrowRight from 'public/img/icons/arrow_right.svg';
+import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { FC, useCallback, useEffect } from 'react';
+import { errorName } from '../helpers';
+import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authSchema } from '../validation';
+import { AuthComponentProperties } from '../types';
 
 const captions = {
   login: {
@@ -29,20 +30,15 @@ const captions = {
     href: 'login'
 
   }
-}
+};
 
-interface AuthComponentProperties {
-  type: 'login' | 'signup'
-  mutationError: any
-  mutation: any
-}
 const AuthComponent: FC<AuthComponentProperties> = (props) => {
-  const { type = 'login', mutationError, mutation } = props
+  const { type = 'login', mutationError, mutation } = props;
 
-  const { loading, currentUser } = useAuth()
-  const router = useRouter()
+  const { loading, currentUser } = useAuth();
+  const router = useRouter();
 
-  const defaultText = captions[type]
+  const defaultText = captions[type];
 
   const {
     handleSubmit,
@@ -54,7 +50,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
   } = useForm({
     resolver: zodResolver(authSchema),
     mode: 'onSubmit'
-  })
+  });
 
   const onSubmit = useCallback(({ email, password }) => {
     mutation({
@@ -62,20 +58,20 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
         email,
         password
       }
-    }).then(async () => await router.push('/'))
-  }, [router])
+    }).then(async () => await router.push('/'));
+  }, [router, mutation]);
 
   useEffect(() => {
     if (!loading && currentUser) {
-      router.push('/')
+      router.push('/').catch(console.error);
     }
-  }, [currentUser, loading, router])
+  }, [currentUser, loading, router]);
 
   useEffect(() => {
     if (mutationError) {
-      setError(errorName(mutationError), { message: mutationError?.message })
+      setError(errorName(mutationError), { message: mutationError?.message });
     }
-  }, [])
+  }, [mutationError, setError]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -252,7 +248,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
         </GridColumn>
       </GridRow>
     </form>
-  )
-}
+  );
+};
 
-export default AuthComponent
+export default AuthComponent;

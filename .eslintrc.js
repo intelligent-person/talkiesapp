@@ -2,7 +2,6 @@
 module.exports = {
   extends: [
     'plugin:react/recommended',
-    'semistandard',
     'plugin:compat/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:unicorn/recommended',
@@ -34,6 +33,7 @@ module.exports = {
   ],
   rules: {
     'strict-null-checks/all': 'warn',
+    semi: ['error', 'always'],
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
     quotes: ['error', 'single', { avoidEscape: true }],
     'jsx-quotes': ['error', 'prefer-double'],
@@ -50,12 +50,14 @@ module.exports = {
     'react/jsx-uses-react': 'warn',
     'react/react-in-jsx-scope': 'off',
     'unicorn/no-array-reduce': 'warn',
-    'unicorn/no-null': 'warn',
+    'unicorn/no-null': 'off',
     'unicorn/prefer-query-selector': 'warn',
     'unicorn/no-unsafe-regex': 'error',
     'unicorn/prefer-object-from-entries': 'warn',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/semi': ['off'],
     'unicorn/prevent-abbreviations': [
       'error',
       {
@@ -84,4 +86,4 @@ module.exports = {
       version: 'detect'
     }
   }
-}
+};

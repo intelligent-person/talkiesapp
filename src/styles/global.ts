@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { css } from '@emotion/react';
 
 export const globalCSS = css`
   body {
@@ -18,4 +18,4 @@ export const globalCSS = css`
     font-weight: normal;
     font-style: normal;
   }
-`
+`;
