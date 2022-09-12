@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const H1 = styled('h1')`
   ${({ theme }) => `
@@ -9,7 +9,7 @@ export const H1 = styled('h1')`
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
   `}
-`
+`;
 export const H4 = styled('h4')`
   ${({ theme }) => `
     color: ${theme.typeface.h4.color};
@@ -19,7 +19,7 @@ export const H4 = styled('h4')`
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
   `}
-`
+`;
 export const H6 = styled('h4')`
   ${({ theme }) => `
     color: ${theme.typeface.h6.color};
@@ -29,4 +29,4 @@ export const H6 = styled('h4')`
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
   `}
-`
+`;

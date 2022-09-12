@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import { filterProperties } from './helpers'
+import styled from '@emotion/styled';
+import { filterProperties } from './helpers';
 
 interface NavProperties {
   withImage?: boolean
@@ -7,7 +7,7 @@ interface NavProperties {
 
 const NavForwardProperties = new Set([
   'withImage'
-])
+]);
 
 export const Nav = styled('a', {
   shouldForwardProp: filterProperties(NavForwardProperties)
@@ -38,7 +38,7 @@ export const Nav = styled('a', {
     align-items: center;
     margin: 0 auto;
   `}
-`
+`;
 
 interface ButtonProperties {
   primary?: boolean
@@ -48,7 +48,7 @@ interface ButtonProperties {
 const ButtonForwardProperties = new Set([
   'primary',
   'secondary'
-])
+]);
 
 export const Button = styled('button', {
   shouldForwardProp: filterProperties(ButtonForwardProperties)
@@ -107,4 +107,4 @@ export const Button = styled('button', {
         color: ${theme.buttons.secondary.active.color};
       }
   `}
-`
+`;

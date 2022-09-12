@@ -1,15 +1,16 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { Global, ThemeProvider } from '@emotion/react'
-import { theme } from '../styles/theme'
-import { globalCSS } from '../styles'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { Global, ThemeProvider } from '@emotion/react';
+import { theme } from '../styles/theme';
+import { globalCSS } from '../styles';
+import { AppProps } from 'next/app';
 
 export const apolloClient = new ApolloClient({
   uri: '/api/graphql',
   cache: new InMemoryCache(),
   credentials: 'include'
-})
+});
 
-function MyApp ({ Component, pageProps }) {
+export default function MyApp ({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
@@ -19,7 +20,5 @@ function MyApp ({ Component, pageProps }) {
         <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>
-  )
+  );
 }
-
-export default MyApp

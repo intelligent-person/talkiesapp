@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client';
 
 type MutationKey = 'login' | 'logout' | 'signin'
 
@@ -8,17 +8,17 @@ export const useAuthMutation = (key: MutationKey, MUTATION) => {
       cache.modify({
         fields: {
           me () {
-            return data[key].user
+            return data[key].user;
           }
         }
-      })
+      });
     }
-  })
+  });
 
   return {
     loading,
     error,
     currentUser: data?.me,
     mutation: mutateFunction
-  }
-}
+  };
+};

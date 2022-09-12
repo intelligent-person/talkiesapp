@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { Nav, Button, H1 } from '../styles'
-import { useAuth } from '../hooks/useAuth'
-import { useAuthMutation } from '../hooks/useAuthMutation'
-import { LOGOUT_MUTATION } from '../types'
+import Link from 'next/link';
+import { Nav, Button, H1 } from '../styles';
+import { useAuth } from '../hooks/useAuth';
+import { useAuthMutation } from '../hooks/useAuthMutation';
+import { LOGOUT_MUTATION } from '../types';
 
 function Home () {
-  const { loading, currentUser } = useAuth()
-  const { mutation } = useAuthMutation('logout', LOGOUT_MUTATION)
+  const { loading, currentUser } = useAuth();
+  const { mutation } = useAuthMutation('logout', LOGOUT_MUTATION);
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <p>Loading...</p>;
   if (!currentUser) {
     return (<div>
       <Nav
@@ -19,7 +19,7 @@ function Home () {
         as={Link}
         href={'/login'}
       >Login</Nav>
-    </div>)
+    </div>);
   }
 
   return (
@@ -30,7 +30,7 @@ function Home () {
         onClick={async () => await mutation()}
       >Logout</Button>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
