@@ -1,16 +1,16 @@
-import {gql, useQuery} from "@apollo/client";
+import { gql, useQuery } from '@apollo/client'
 
 const GET_GREETING = gql`
-    query {
-        me {
-            id
-            name
-            email
-        }
-    }
-`;
+  query {
+      me {
+          id
+          name
+          email
+      }
+  }
+`
 
 export const useAuth = () => {
-  const { loading, error, data } = useQuery(GET_GREETING);
+  const { loading, error, data } = useQuery(GET_GREETING)
   return { loading, error, currentUser: data?.me }
 }

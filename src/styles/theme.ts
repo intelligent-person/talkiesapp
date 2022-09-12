@@ -3,7 +3,7 @@ export const theme = {
     s: 600,
     m: 1024,
     l: 1440,
-    xl: 1920,
+    xl: 1920
   },
   colors: {
     primary: '#E7E7E7',
@@ -15,20 +15,23 @@ export const theme = {
       background: '#B93434',
       color: '#E7E7E7',
       filter: 'drop-shadow(0px 3.01056px 22.5792px rgba(54, 0, 0, 0.4))',
+      border: '1px solid #E7E7E7',
       hover: {
         background: '#821919',
         filter: 'drop-shadow(0px 3.01056px 22.5792px rgba(54, 0, 0, 0.6))',
-        boxShadow: 'inset -1.50528px -1.50528px 9.03168px rgba(0, 0, 0, 0.35);'
+        boxShadow: 'inset -1.50528px -1.50528px 9.03168px rgba(0, 0, 0, 0.35);',
+        border: '1px solid #FFFFFF'
       },
       active: {
-        background: '#3E3E3E'
+        background: '#3E3E3E',
+        border: '1px solid #000000'
       },
       sizes: {
         default: {
           fontSize: '27px',
           fontWeight: 700,
           borderRadius: '12px',
-          padding: '19px 35px',
+          padding: '19px 35px'
         }
       }
     },
@@ -41,14 +44,14 @@ export const theme = {
       },
       active: {
         background: '#3E3E3E',
-        color: '#E7E7E7',
+        color: '#E7E7E7'
       },
       sizes: {
         default: {
           fontSize: '22px',
           fontWeight: 200,
-          borderRadius: '75px',
-          padding: '11px 25px',
+          borderRadius: '12px',
+          padding: '11px 25px'
         }
       }
     }
@@ -81,7 +84,7 @@ export const theme = {
       fontWeight: 200,
       fontSize: '22px',
       lineHeight: '26px',
-      borderRadius: '100px',
+      borderRadius: '12px',
       padding: '15px 25px',
       hover: {
         background: '#FFFFFF',

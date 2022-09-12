@@ -1,35 +1,19 @@
-import {GridColumn, GridRow} from "emotion-flex-grid";
-import {css} from "@emotion/react";
-import {
-  alignItems,
-  Button,
-  flex, fontWeight,
-  FormGroup,
-  gridGap,
-  H1,
-  H4,
-  H6,
-  Input,
-  justifyContent,
-  Label,
-  mb, Nav,
-  uppercase,
-  width,
-  m
-} from "../styles";
+import { GridColumn, GridRow } from 'emotion-flex-grid'
+import { css } from '@emotion/react'
+import { alignItems, Button, flex, fontWeight, FormGroup, gridGap, H1, H4, H6, Input, justifyContent, Label, mb, Nav, uppercase, width } from '../styles'
 import Google from 'public/img/icons/google.svg'
 import Github from 'public/img/icons/github.svg'
 import ArrowRight from 'public/img/icons/arrow_right.svg'
-import Image from "next/image";
-import {useForm} from "react-hook-form";
-import {ErrorMessage} from '@hookform/error-message';
-import {useCallback, useEffect} from "react";
-import {errorName} from "../helpers";
-import {useAuth} from "../hooks/useAuth";
-import {useRouter} from "next/router";
-import Link from "next/link";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {authSchema} from "../validation";
+import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { ErrorMessage } from '@hookform/error-message'
+import { FC, useCallback, useEffect } from 'react'
+import { errorName } from '../helpers'
+import { useAuth } from '../hooks/useAuth'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { authSchema } from '../validation'
 
 const captions = {
   login: {
@@ -43,18 +27,23 @@ const captions = {
     caption: 'Already have an account?',
     link: 'Log In',
     href: 'login'
-    
+
   }
 }
 
-const AuthComponent = (props) => {
-  const {type = 'login', mutationError, mutation} = props
-  
-  const {loading, currentUser} = useAuth();
+interface AuthComponentProperties {
+  type: 'login' | 'signup'
+  mutationError: any
+  mutation: any
+}
+const AuthComponent: FC<AuthComponentProperties> = (props) => {
+  const { type = 'login', mutationError, mutation } = props
+
+  const { loading, currentUser } = useAuth()
   const router = useRouter()
-  
+
   const defaultText = captions[type]
-  
+
   const {
     handleSubmit,
     register,
@@ -66,28 +55,28 @@ const AuthComponent = (props) => {
     resolver: zodResolver(authSchema),
     mode: 'onSubmit'
   })
-  
-  const onSubmit = useCallback(({email, password}) => {
+
+  const onSubmit = useCallback(({ email, password }) => {
     mutation({
       variables: {
         email,
         password
       }
-    }).then(() => router.push('/'))
+    }).then(async () => await router.push('/'))
   }, [router])
-  
+
   useEffect(() => {
     if (!loading && currentUser) {
       router.push('/')
     }
-  }, [currentUser, loading])
-  
+  }, [currentUser, loading, router])
+
   useEffect(() => {
     if (mutationError) {
-      setError(errorName(mutationError), {message: mutationError?.message})
+      setError(errorName(mutationError), { message: mutationError?.message })
     }
-  }, [mutationError])
-  
+  }, [])
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <GridRow
@@ -95,25 +84,26 @@ const AuthComponent = (props) => {
         align={'center'}
         css={css`
           position: fixed;
+          overflow-y: auto;
           top: 0;
           left: 0;
           height: 100%;
           width: 100%;
           background: url("/img/bgc.png") center no-repeat;
           background-size: cover;
-          padding: 35px 0 50px;
+          padding: 35px 0 40px;
         `}
       >
         <GridColumn
           width={'auto'}
           css={{
             height: '60px',
-            marginBottom: 55
+            marginBottom: 37
           }}
         />
         <GridColumn
           width={'auto'}
-          css={{marginBottom: 30}}
+          css={{ marginBottom: 40 }}
         >
           <H1>Movies, series, cartoons - in one place.</H1>
         </GridColumn>
@@ -122,17 +112,18 @@ const AuthComponent = (props) => {
           textAlign={'center'}
           css={css`
             width: 637px;
-            padding: 37px;
+            padding: 15px 37px;
             background: rgba(134, 134, 134, 0.4);
             backdrop-filter: blur(41.5887px);
             border-radius: 20px;
           `}
         >
           <H4
-            css={css`
-              font-weight: 600;
-              margin-bottom: 20px;
-            `}
+            css={[
+              mb(20),
+              fontWeight(500),
+              uppercase
+            ]}
           >{defaultText.title}</H4>
           <GridRow
             justify={'between'}
@@ -147,7 +138,7 @@ const AuthComponent = (props) => {
                 flex,
                 justifyContent('between'),
                 width('50%'),
-                alignItems('center'),
+                alignItems('center')
               ]}
             >
               <Image src={Google} height={33} width={33}/>
@@ -159,7 +150,7 @@ const AuthComponent = (props) => {
                 flex,
                 justifyContent('between'),
                 width('50%'),
-                alignItems('center'),
+                alignItems('center')
               ]}
             >
               <Image src={Github} height={33} width={33}/>
@@ -172,7 +163,7 @@ const AuthComponent = (props) => {
               border-style: solid;
               border-image: linear-gradient(to right, rgba(231, 231, 231, 0), rgba(231, 231, 231, 1), rgba(231, 231, 231, 0)) 100% 0;
               content: '';
-              margin-bottom: 25px;
+              margin-bottom: 20px;
             `}
           />
           <FormGroup
@@ -190,8 +181,8 @@ const AuthComponent = (props) => {
             >Enter your email</Label>
             <ErrorMessage
               errors={errors}
-              name={`email`}
-              render={({message}) => (
+              name={'email'}
+              render={({ message }) => (
                 <Label
                   className={'invalid'}
                 >{message}</Label>
@@ -207,7 +198,7 @@ const AuthComponent = (props) => {
               type={'password'}
               placeholder={'Enter your password'}
               {...register('password', {
-                maxLength: {value: 20, message: 'lox'},
+                maxLength: { value: 20, message: 'lox' }
               })}
             />
             <Label
@@ -216,8 +207,8 @@ const AuthComponent = (props) => {
             >Enter your password</Label>
             <ErrorMessage
               errors={errors}
-              name={`password`}
-              render={({message}) => (
+              name={'password'}
+              render={({ message }) => (
                 <Label
                   className={'invalid'}
                 >{message}</Label>
@@ -261,7 +252,7 @@ const AuthComponent = (props) => {
         </GridColumn>
       </GridRow>
     </form>
-  );
-};
+  )
+}
 
-export default AuthComponent;
+export default AuthComponent
