@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import { useAuthMutation } from '../hooks/useAuthMutation'
-import { SIGNUP_MUTATION } from '../types/graphql'
 import AuthComponent from '../components/AuthComponent'
+import { SIGNUP_MUTATION } from '../types'
 
 const SignUpPage: NextPage = () => {
   const { mutation, error } = useAuthMutation('signin', SIGNUP_MUTATION)

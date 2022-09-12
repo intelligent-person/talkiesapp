@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { authSchema } from '../validation'
+import { AuthComponentProperties } from '../types'
 
 const captions = {
   login: {
@@ -31,11 +32,6 @@ const captions = {
   }
 }
 
-interface AuthComponentProperties {
-  type: 'login' | 'signup'
-  mutationError: any
-  mutation: any
-}
 const AuthComponent: FC<AuthComponentProperties> = (props) => {
   const { type = 'login', mutationError, mutation } = props
 

@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { css, Global, ThemeProvider } from '@emotion/react'
+import { Global, ThemeProvider } from '@emotion/react'
 import { theme } from '../styles/theme'
 import { globalCSS } from '../styles'
 

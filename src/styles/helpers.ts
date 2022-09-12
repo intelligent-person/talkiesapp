@@ -124,7 +124,7 @@ export const gridGap = gap => mq({
 
 export const opacity = opacity => mq({ opacity })
 
-export function hexToRGB (hex, opacity = 1) {
+export function hexToRGB (hex: string, opacity: number = 1) {
   let r = 0
   let g = 0
   let b = 0

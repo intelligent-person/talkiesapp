@@ -1,8 +1,10 @@
 import { mq } from './helpers'
+import { AlignItems } from '../types'
 
 const alignItemsAliases = {
   start: 'flex-start',
-  end: 'flex-end'
+  end: 'flex-end',
+  center: 'center'
 }
 
 const justifyContentAliases = {
@@ -13,8 +15,8 @@ const justifyContentAliases = {
   evenly: 'space-evenly'
 }
 
-export const alignItems = (align: string) => mq({
-  alignItems: alignItemsAliases[align] || align
+export const alignItems = (align: AlignItems) => mq({
+  alignItems: alignItemsAliases[align]
 })
 
 export const alignSelf = align => mq({
@@ -32,7 +34,7 @@ export const flex = mq({
   display: 'flex'
 })
 
-export const flexWrap = wrap => mq({
+export const flexWrap = (wrap) => mq({
   flexWrap: wrap
 })
 

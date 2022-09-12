@@ -1,9 +1,8 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { Nav, Button, H1 } from '../styles'
 import { useAuth } from '../hooks/useAuth'
 import { useAuthMutation } from '../hooks/useAuthMutation'
-import { LOGOUT_MUTATION } from '../types/graphql'
+import { LOGOUT_MUTATION } from '../types'
 
 function Home () {
   const { loading, currentUser } = useAuth()
