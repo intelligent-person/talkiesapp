@@ -3,19 +3,24 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["dataProxy"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("MIGRATE_DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
+  id            String         @id @default(uuid())
+  name          String?
+  email         String
+  password      String?
+  provider      String
+  image         String?
+  createdAt     DateTime       @default(now())
+
+  @@unique(fields: [email, provider], name: "isUserExists")
 }
 
 //model User {

@@ -1,24 +1,22 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { Global, ThemeProvider } from '@emotion/react';
 import { theme } from '../styles/theme';
 import { globalCSS } from '../styles';
 import { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
+import { apolloClient } from '../apolloClient';
 
-export const apolloClient = new ApolloClient({
-  uri: '/api/graphql',
-  cache: new InMemoryCache(),
-  credentials: 'include'
-});
-
-export default function MyApp ({ Component, pageProps }: AppProps) {
+export default function MyApp ({ Component, pageProps: { session, ...pageProperties } }: AppProps) {
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={theme}>
-        <Global
-          styles={globalCSS}
-        />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </ApolloProvider>
+    <SessionProvider session={session}>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <Global
+            styles={globalCSS}
+          />
+          <Component {...pageProperties} />
+        </ThemeProvider>
+      </ApolloProvider>
+    </SessionProvider>
   );
 }
