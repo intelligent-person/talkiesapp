@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '../validation';
 import { AuthComponentProperties } from '../types';
+import { signIn } from 'next-auth/react';
 
 const captions = {
   login: {
@@ -62,16 +63,24 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
   }, [router, mutation]);
 
   useEffect(() => {
-    if (!loading && currentUser) {
+    if (currentUser) {
       router.push('/').catch(console.error);
     }
-  }, [currentUser, loading, router]);
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (mutationError) {
       setError(errorName(mutationError), { message: mutationError?.message });
     }
   }, [mutationError, setError]);
+
+  if (loading) {
+    return null;
+  }
+
+  if (currentUser) {
+    router.push('/').catch(console.error);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,6 +139,8 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           >
             <Button
               secondary
+              type={'button'}
+              onClick={async () => await signIn('google')}
               css={[
                 flex,
                 justifyContent('between'),
@@ -142,6 +153,8 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
             </Button>
             <Button
               secondary
+              type={'button'}
+              onClick={async () => await signIn('github')}
               css={[
                 flex,
                 justifyContent('between'),

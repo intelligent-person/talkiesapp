@@ -1,11 +1,11 @@
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import { useAuthMutation } from '../hooks/useAuthMutation';
 import AuthComponent from '../components/AuthComponent';
 import { LOGIN_MUTATION } from '../types';
+import { getSession } from 'next-auth/react';
 
 const LoginPage: NextPage = () => {
   const { error, mutation } = useAuthMutation('login', LOGIN_MUTATION);
-
   return (
     <AuthComponent
       type={'login'}
@@ -14,5 +14,20 @@ const LoginPage: NextPage = () => {
     />
   );
 };
+
+export async function getServerSideProps (context: NextPageContext) {
+  const { req } = context;
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: { destination: '/' }
+    };
+  }
+
+  return {
+    props: {}
+  };
+}
 
 export default LoginPage;
