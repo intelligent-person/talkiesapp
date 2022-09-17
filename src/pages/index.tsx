@@ -9,7 +9,6 @@ import { signOut } from 'next-auth/react';
 function Home () {
   const { loading, currentUser } = useAuth();
   const { mutation } = useAuthMutation('logout', LOGOUT_MUTATION);
-  console.log(currentUser);
   const signOutClick = useCallback(async () => {
     await (currentUser?.provider === 'email' ? mutation() : signOut());
   }, [currentUser?.provider, mutation]);
