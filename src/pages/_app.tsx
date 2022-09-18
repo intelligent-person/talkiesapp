@@ -5,6 +5,7 @@ import { globalCSS } from '../styles';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { apolloClient } from '../apolloClient';
+import Script from 'next/script';
 
 export default function MyApp ({ Component, pageProps: { session, ...pageProperties } }: AppProps) {
   return (
@@ -14,7 +15,10 @@ export default function MyApp ({ Component, pageProps: { session, ...pagePropert
           <Global
             styles={globalCSS}
           />
+          <meta name="my_id" content="600"/>
           <Component {...pageProperties} />
+          <Script src="https://kinobd.ru/js/player_.js" />
+
         </ThemeProvider>
       </ApolloProvider>
     </SessionProvider>
