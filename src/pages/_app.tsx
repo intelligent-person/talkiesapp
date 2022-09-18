@@ -17,7 +17,8 @@ export default function MyApp ({ Component, pageProps: { session, ...pagePropert
           />
           <meta name="my_id" content="600"/>
           <Component {...pageProperties} />
-          <Script src="https://kinobd.ru/js/player_.js" />
+          {/* <Script src="https://kinobd.ru/js/player_.js" /> */}
+          <Script src="https://kinoplayer.top/top.js" />
 
         </ThemeProvider>
       </ApolloProvider>
