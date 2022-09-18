@@ -23,7 +23,7 @@ function Watch () {
         id="kinobd"
         data-resize="1"
         data-bg="#000"
-        data-kinopoisk={query?.id}
+        data-kinopoisk={id}
       ></div>
       <Script
         strategy="beforeInteractive"
