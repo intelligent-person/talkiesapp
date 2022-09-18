@@ -35,12 +35,6 @@ function Home () {
   return (
     <div>
       <H1>Welcome back, {currentUser?.email}</H1>
-      {/* <div css={css` */}
-      {/*   width: 100% !important; */}
-      {/*   height: 100% !important; */}
-      {/* `}> */}
-      {/*   <iframe css={height('100% !important')} title={'film'} src={'https://red.uboost.one/start/bdd26f9306d47d4ecc9a906ec4826ab3/fae073c3763e61dc928b3ae050f43173'}/> */}
-      {/* </div> */}
       <Button
         onClick={signOutClick}
       >Logout</Button>
