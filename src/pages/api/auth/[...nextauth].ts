@@ -1,9 +1,9 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Github from 'next-auth/providers/github';
 import prisma from '../../../../prisma/prisma';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     Github({
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -59,4 +59,6 @@ export default NextAuth({
   pages: {
     signIn: '/login'
   }
-});
+};
+
+export default NextAuth(authOptions);
