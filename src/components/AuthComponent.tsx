@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { FC, useCallback, useEffect } from 'react';
 import { errorName } from '../helpers';
-import { useAuth } from '../hooks/useAuth';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,7 +35,6 @@ const captions = {
 const AuthComponent: FC<AuthComponentProperties> = (props) => {
   const { type = 'login', mutationError, mutation } = props;
 
-  const { loading, currentUser } = useAuth();
   const router = useRouter();
 
   const defaultText = captions[type];
@@ -63,24 +61,10 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
   }, [router, mutation]);
 
   useEffect(() => {
-    if (currentUser) {
-      router.push('/').catch(console.error);
-    }
-  }, [currentUser, router]);
-
-  useEffect(() => {
     if (mutationError) {
       setError(errorName(mutationError), { message: mutationError?.message });
     }
   }, [mutationError, setError]);
-
-  if (loading) {
-    return null;
-  }
-
-  if (currentUser) {
-    router.push('/').catch(console.error);
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
