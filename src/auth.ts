@@ -13,7 +13,6 @@ export async function authenticateUser (prisma: PrismaClient, request): Promise<
         }
       }
     });
-    console.log(user);
     return user;
   }
   if (request?.cookies?.token) {

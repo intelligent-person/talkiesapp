@@ -2,13 +2,21 @@ import { ApolloServer } from 'apollo-server-micro';
 import { schema } from '../../../graphql/schema/schema';
 import { createContext } from '../../../graphql/context/context';
 import Cors from 'micro-cors';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 const cors = Cors();
 
 const apolloServer = new ApolloServer({
   schema,
   context: async ({ req, res }) => await createContext(req, res),
-  cache: 'bounded'
+  cache: 'bounded',
+  plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground({
+      settings: {
+        'request.credentials': 'include'
+      }
+    })
+  ]
 });
 
 const startServer = apolloServer.start();
