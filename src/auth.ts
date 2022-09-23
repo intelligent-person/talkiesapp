@@ -1,9 +1,10 @@
 import { PrismaClient, User } from '@prisma/client';
 import { JwtPayload, verify } from 'jsonwebtoken';
-import { getSession } from 'next-auth/react';
+import { authOptions } from './pages/api/auth/[...nextauth]';
+import { unstable_getServerSession } from 'next-auth';
 
-export async function authenticateUser (prisma: PrismaClient, request): Promise<User | null> {
-  const session = await getSession({ req: request });
+export async function authenticateUser (prisma: PrismaClient, request, response): Promise<User | null> {
+  const session = await unstable_getServerSession(request, response, authOptions);
   if (session) {
     const user = await prisma.user.findUnique({
       where: {

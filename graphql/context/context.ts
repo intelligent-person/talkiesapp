@@ -12,7 +12,7 @@ export interface Context {
 export async function createContext (request, response): Promise<Context> {
   return {
     prisma,
-    currentUser: await authenticateUser(prisma, request),
+    currentUser: await authenticateUser(prisma, request, response),
     setCookies: (tokenName, token, options) =>
       response.setHeader('Set-Cookie', serialize(tokenName, token, { path: '/', httpOnly: true, ...options }))
   };
