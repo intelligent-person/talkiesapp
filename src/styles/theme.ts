@@ -9,7 +9,7 @@ export const theme = {
     primary: '#E7E7E7',
     secondary: '#232323'
   },
-  fontFamily: 'SF UI Display, system-ui',
+  fontFamily: 'Montserrat, sans-serif',
   buttons: {
     primary: {
       background: '#B93434',
@@ -32,6 +32,12 @@ export const theme = {
           fontWeight: 700,
           borderRadius: '12px',
           padding: '19px 35px'
+        },
+        small: {
+          fontSize: '16px',
+          fontWeight: 700,
+          borderRadius: '10px',
+          padding: '12px 20px'
         }
       }
     },
@@ -48,10 +54,16 @@ export const theme = {
       },
       sizes: {
         default: {
-          fontSize: '22px',
-          fontWeight: 200,
+          fontSize: '20px',
+          fontWeight: 300,
           borderRadius: '12px',
-          padding: '11px 25px'
+          padding: '10px 11px'
+        },
+        small: {
+          fontSize: '16px',
+          fontWeight: 300,
+          borderRadius: '10px',
+          padding: '12px 13.5px'
         }
       }
     }
@@ -62,38 +74,78 @@ export const theme = {
       fontSize: '60px',
       lineHeight: '71.6px',
       fontWeight: '300',
-      color: '#E7E7E7'
+      color: '#E7E7E7',
+      mobile: {
+        fontSize: '40px',
+        lineHeight: '48.6px'
+      }
     },
     h4: {
-      fontSize: '27px',
-      lineHeight: '32.22px',
-      fontWeight: '400',
-      color: '#E7E7E7'
+      fontSize: '24px',
+      lineHeight: '29.26px',
+      fontWeight: '700',
+      color: '#E7E7E7',
+      mobile: {
+        fontSize: '18px',
+        lineHeight: '21.94px'
+      }
     },
     h6: {
-      fontSize: '22px',
-      lineHeight: '26.25px',
-      fontWeight: '500',
-      color: '#E7E7E7'
+      fontSize: '20px',
+      lineHeight: '24.38px',
+      fontWeight: '300',
+      color: '#E7E7E7',
+      mobile: {
+        fontSize: '12px',
+        lineHeight: '14.63px'
+      }
     }
   },
   forms: {
+    label: {
+      color: '#000000',
+      fontWeight: 500,
+      sizes: {
+        default: {
+          fontSize: '14px',
+          lineHeight: '17.07px',
+          borderRadius: '12px',
+          padding: '5px 10px'
+        },
+        small: {
+          fontSize: '10px',
+          lineHeight: '12.19px',
+          borderRadius: '15px',
+          padding: '2px 5px'
+        }
+      }
+    },
     input: {
       background: '#E7E7E7',
       color: '#232323',
-      fontWeight: 200,
-      fontSize: '22px',
-      lineHeight: '26px',
-      borderRadius: '12px',
-      padding: '15px 25px',
+      fontWeight: 300,
       hover: {
         background: '#FFFFFF',
-        boxShadow: '0px 0px 6.03944px #CBCBCB'
+        boxShadow: '0px 0px 5.98773px #CBCBCB'
       },
       focus: {
         background: '#FFFFFF',
         color: '#000000',
         boxShadow: 'inset -1.49693px -1.49693px 5.98773px rgba(0, 0, 0, 0.45)'
+      },
+      sizes: {
+        default: {
+          fontSize: '22px',
+          lineHeight: '26px',
+          borderRadius: '12px',
+          padding: '15px 25px'
+        },
+        small: {
+          fontSize: '16px',
+          lineHeight: '19.5px',
+          borderRadius: '10px',
+          padding: '12px 14px'
+        }
       }
     }
   }

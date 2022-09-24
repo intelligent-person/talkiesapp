@@ -13,13 +13,17 @@ export const Nav = styled('a', {
   shouldForwardProp: filterProperties(NavForwardProperties)
 })<NavProperties>`
   font-weight: 500;
-  font-size: 22px;
+  font-size: 20px;
   padding: 5px;
   text-decoration: none;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-color: transparent;
   cursor: pointer;
+  
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 
   :hover {
     color: #FFFFFF;
@@ -37,17 +41,29 @@ export const Nav = styled('a', {
     width: fit-content;
     align-items: center;
     margin: 0 auto;
+    
+    span {
+      width: 22px !important;
+      height: 22px !important;
+     
+      @media (min-width: 600px) {
+        width: 36px !important;
+        height: 36px !important;
+      }
+    }
   `}
 `;
 
 interface ButtonProperties {
   primary?: boolean
   secondary?: boolean
+  withIcon?: boolean
 }
 
 const ButtonForwardProperties = new Set([
   'primary',
-  'secondary'
+  'secondary',
+  'withIcon'
 ]);
 
 export const Button = styled('button', {
@@ -87,6 +103,13 @@ export const Button = styled('button', {
         background: ${theme.buttons.primary.active.background};
         border: ${theme.buttons.primary.active.border};
       }
+      
+      @media (max-width: 600px) {
+        border-radius: ${theme.buttons.primary.sizes.small.borderRadius};
+        padding: ${theme.buttons.primary.sizes.small.padding};
+        font-size: ${theme.buttons.primary.sizes.small.fontSize};
+        font-weight: ${theme.buttons.primary.sizes.small.fontWeight};
+      }
   `}
   
   ${({ theme, secondary }) => secondary && `
@@ -105,6 +128,29 @@ export const Button = styled('button', {
       :active {
         background: ${theme.buttons.secondary.active.background};
         color: ${theme.buttons.secondary.active.color};
+      }
+      
+      @media (max-width: 600px) {
+        border-radius: ${theme.buttons.secondary.sizes.small.borderRadius};
+        padding: ${theme.buttons.secondary.sizes.small.padding};
+        font-size: ${theme.buttons.secondary.sizes.small.fontSize};
+        font-weight: ${theme.buttons.secondary.sizes.small.fontWeight};
+      }
+  `}
+  
+  ${({ withIcon }) => withIcon && `
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      span {
+        width: 18px !important;
+        height: 18px !important;
+        
+        @media (min-width: 600px) {
+          width: 36px !important;
+          height: 36px !important;
+        }
       }
   `}
 `;

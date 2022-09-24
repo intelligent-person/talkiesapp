@@ -1,6 +1,21 @@
 import { GridColumn, GridRow } from 'emotion-flex-grid';
 import { css } from '@emotion/react';
-import { alignItems, Button, flex, fontWeight, FormGroup, gridGap, H1, H4, H6, Input, justifyContent, Label, mb, Nav, uppercase, width } from '../styles';
+import {
+  Button, display,
+  FormGroup,
+  gridGap,
+  H1,
+  H4,
+  H6,
+  height,
+  Input,
+  Label,
+  mb,
+  Nav,
+  uppercase,
+  width,
+  p, flexDirection
+} from '../styles';
 import Google from 'public/img/icons/google.svg';
 import Github from 'public/img/icons/github.svg';
 import ArrowRight from 'public/img/icons/arrow_right.svg';
@@ -50,7 +65,6 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
     resolver: zodResolver(authSchema),
     mode: 'onSubmit'
   });
-
   const onSubmit = useCallback(({ email, password }) => {
     mutation({
       variables: {
@@ -78,39 +92,40 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           left: 0;
           height: 100%;
           width: 100%;
-          background: url("/img/bgc.png") center no-repeat;
-          background-size: cover;
-          padding: 35px 0 40px;
+          background-color: #161517;
+          padding: 35px 20px 40px;
         `}
       >
         <GridColumn
           width={'auto'}
-          css={{
-            height: '60px',
-            marginBottom: 37
-          }}
+          css={[
+            height(60),
+            mb([14, 37])
+          ]}
         />
         <GridColumn
           width={'auto'}
-          css={{ marginBottom: 40 }}
+          css={mb([14, 40])}
         >
-          <H1>Movies, series, cartoons - in one place.</H1>
+          <H1>Movies, series, cartoons -{' '}
+            <br css={display(['block', 'none'])}/>
+            in one place.</H1>
         </GridColumn>
         <GridColumn
           width={'auto'}
           textAlign={'center'}
-          css={css`
-            width: 637px;
-            padding: 15px 37px;
+          css={[
+            width(['100%', 637]),
+            p(['28px 14px', '15px 37px']),
+            css`
             background: rgba(134, 134, 134, 0.4);
             backdrop-filter: blur(41.5887px);
             border-radius: 20px;
-          `}
+          `]}
         >
           <H4
             css={[
-              mb(20),
-              fontWeight(500),
+              mb([14, 20]),
               uppercase
             ]}
           >{defaultText.title}</H4>
@@ -118,46 +133,61 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
             justify={'between'}
             css={[
               gridGap(19),
-              mb(25)
+              mb([14])
             ]}
           >
             <Button
               secondary
+              withIcon
               type={'button'}
               onClick={async () => await signIn('google')}
               css={[
-                flex,
-                justifyContent('between'),
                 width('50%'),
-                alignItems('center')
+                flexDirection(['row-reverse', 'row'])
               ]}
             >
-              <Image src={Google} height={33} width={33}/>
-              Sign in with Google
+              <Image
+                src={Google}
+                alt={'Google'}
+              />
+              <div>
+                Sign in with{' '}
+                <div
+                  css={display(['none', 'inline-block'])}
+                >Google</div>
+              </div>
             </Button>
             <Button
               secondary
+              withIcon
               type={'button'}
               onClick={async () => await signIn('github')}
               css={[
-                flex,
-                justifyContent('between'),
                 width('50%'),
-                alignItems('center')
+                flexDirection(['row-reverse', 'row'])
               ]}
             >
-              <Image src={Github} height={33} width={33}/>
-              Sign in with GitHub
+              <Image
+                src={Github}
+                alt={'Github'}
+              />
+              <div>
+                Sign in with{' '}
+                <div
+                  css={display(['none', 'inline-block'])}
+                >GitHub</div>
+              </div>
             </Button>
           </GridRow>
           <div
-            css={css`
+            css={[
+              mb([14, 20]),
+              css`
               border-width: 0.5px;
               border-style: solid;
               border-image: linear-gradient(to right, rgba(231, 231, 231, 0), rgba(231, 231, 231, 1), rgba(231, 231, 231, 0)) 100% 0;
               content: '';
-              margin-bottom: 20px;
-            `}
+            `]}
           />
           <FormGroup
             invalid={!!errors?.email}
@@ -166,6 +196,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
               id={'email'}
               type={'email'}
               placeholder={'Enter your email'}
+              invalid={!!errors?.email}
               {...register('email')}
             />
             <Label
@@ -190,6 +221,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
               id={'password'}
               type={'password'}
               placeholder={'Enter your password'}
+              invalid={!!errors?.password}
               {...register('password', {
                 maxLength: { value: 20, message: 'lox' }
               })}
@@ -212,13 +244,11 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
             justify={'center'}
             align={'center'}
             css={[
-              gridGap(20),
+              gridGap([10, 20]),
               mb(20)
             ]}
           >
-            <H6
-              css={fontWeight(200)}
-            >{defaultText.caption}</H6>
+            <H6>{defaultText.caption}</H6>
             <Link
               href={defaultText.href}
             >
