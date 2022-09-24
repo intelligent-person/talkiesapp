@@ -13,8 +13,7 @@ export const globalCSS = css`
   }
 
   @font-face {
-    font-family: "SF UI Display";
-    src: url('../../public/assets/fonts/FontsFree-Net-SF-UI-Display-Regular-1.ttf');
+    font-family: 'Montserrat', sans-serif;
     font-weight: normal;
     font-style: normal;
   }

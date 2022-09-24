@@ -8,6 +8,11 @@ export const H1 = styled('h1')`
     line-height: ${theme.typeface.h1.lineHeight};
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
+    
+    @media (max-width: 600px) {
+      font-size: ${theme.typeface.h1.mobile.fontSize};
+      line-height: ${theme.typeface.h1.mobile.lineHeight};
+    }
   `}
 `;
 export const H4 = styled('h4')`
@@ -18,6 +23,11 @@ export const H4 = styled('h4')`
     line-height: ${theme.typeface.h4.lineHeight};
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
+    
+    @media (max-width: 600px) {
+      font-size: ${theme.typeface.h4.mobile.fontSize};
+      line-height: ${theme.typeface.h4.mobile.lineHeight};
+    }
   `}
 `;
 export const H6 = styled('h4')`
@@ -28,5 +38,10 @@ export const H6 = styled('h4')`
     line-height: ${theme.typeface.h6.lineHeight};
     font-family: ${theme.fontFamily};
     margin: ${theme.typeface.margin};
+    
+    @media (max-width: 600px) {
+      font-size: ${theme.typeface.h6.mobile.fontSize};
+      line-height: ${theme.typeface.h6.mobile.lineHeight};
+    }
   `}
 `;

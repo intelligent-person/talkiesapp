@@ -5,40 +5,51 @@ import { css } from '@emotion/react';
 export const Input = styled('input')`
   width: 100%;
   border: none;
-  transition: all .2s linear;
+  //transition: all .2s linear;
 
   :focus-visible {
     outline: none;
   }
 
-  :-webkit-autofill {
-    transition: all 5000s ease-in-out 0s;
-  }
-
   ${({ theme }) => css`
-    background: ${theme.forms.input.background};
-    border-radius: ${theme.forms.input.borderRadius};
-    padding: ${theme.forms.input.padding};
+    background: ${theme.forms.input.hover.background};
+    font-family: ${theme.fontFamily};
+    padding: ${theme.forms.input.sizes.default.padding};
     color: ${theme.forms.input.color};
     font-weight: ${theme.forms.input.fontWeight};
-    font-size: ${theme.forms.input.fontSize};
-    line-height: ${theme.forms.input.lineHeight};
-    font-family: ${theme.fontFamily};
-    
-    :hover, :focus-visible, :-webkit-autofill {
-      background: ${theme.forms.input.hover.background};
-      box-shadow: ${theme.forms.input.hover.boxShadow};
-      font-weight: ${theme.forms.input.fontWeight};
-      font-size: ${theme.forms.input.fontSize};
-      line-height: ${theme.forms.input.lineHeight};
-      font-family: ${theme.fontFamily};
+
+    font-size: ${theme.forms.input.sizes.default.fontSize};
+    line-height: ${theme.forms.input.sizes.default.lineHeight};
+    border-radius: ${theme.forms.input.sizes.default.borderRadius};
+
+    @media (max-width: 600px) {
+      font-size: ${theme.forms.input.sizes.small.fontSize};
+      line-height: ${theme.forms.input.sizes.small.lineHeight};
+      border-radius: ${theme.forms.input.sizes.small.borderRadius};
+      padding: ${theme.forms.input.sizes.small.padding};
+    }
+
+    :-webkit-autofill,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus,
+    :-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px ${theme.forms.input.background} inset !important;
     }
     
+    :placeholder-shown:not(:focus) {
+      background: ${theme.forms.input.background};
+    }
+
+    :hover {
+      background: ${theme.forms.input.hover.background} !important;
+      box-shadow: ${theme.forms.input.hover.boxShadow} !important;
+    }
+
     :placeholder-shown:hover:not(:focus) + ${Label} {
-        background: #FFFFFF !important;
-      }
-    
-    :not(:placeholder-shown:not(:focus)) {
+      background: #FFFFFF !important;
+    }
+
+    :focus {
       background: ${theme.forms.input.focus.background} !important;
       box-shadow: ${theme.forms.input.focus.boxShadow} !important;
       color: ${theme.forms.input.focus.color} !important;
@@ -49,8 +60,23 @@ export const Input = styled('input')`
 export const Textarea = styled('textarea')``;
 
 export const Label = styled('label')`
+  
   ${({ theme }) => `
     font-family: ${theme.fontFamily};
+    color: ${theme.forms.label.color};
+    font-weight: ${theme.forms.label.fontWeight};
+    
+    font-size: ${theme.forms.label.sizes.default.fontSize};
+    line-height: ${theme.forms.label.sizes.default.lineHeight};
+    border-radius: ${theme.forms.label.sizes.default.borderRadius};
+    padding: ${theme.forms.label.sizes.default.padding};
+    
+    @media(max-width: 600px) {
+      font-size: ${theme.forms.label.sizes.small.fontSize};
+      line-height: ${theme.forms.label.sizes.small.lineHeight};
+      border-radius: ${theme.forms.label.sizes.small.borderRadius};
+      padding: ${theme.forms.label.sizes.small.padding};
+    }
   `}
 `;
 
@@ -68,19 +94,22 @@ export const FormGroup = styled('div', {
   position: relative;
   margin-bottom: 35px;
 
+  @media(max-width: 600px) {
+    margin-bottom: 20px;
+  }
+
   ${Label} {
     position: absolute;
     top: -15px;
-    left: 37px;
-    padding: 5px 8px;
+    left: 40px;
     background: #FFFFFF;
     box-shadow: inset 0px 2.99387px 2.99387px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 18px;
-    color: #000000;
     opacity: 0;
+    
+    @media(max-width: 600px) {
+      top: -10px;
+      left: 17px;
+    }
   }
 
   ${Input}:not(:-webkit-autofill) + ${Label} {
@@ -100,6 +129,14 @@ export const FormGroup = styled('div', {
     font-size: 22px;
     line-height: 26px;
     color: #232323;
+
+    @media(max-width: 600px) {
+      top: 12px;
+      left: 14px;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 19.5px
+    }
   }
 
   ${Input}:not(:placeholder-shown):not(:focus) + ${Label} {
@@ -108,36 +145,48 @@ export const FormGroup = styled('div', {
     left: 25px;
   }
 
-  ${({ invalid }) => invalid && css`
-     ${Input},
-     ${Input}:not(:placeholder-shown:not(:focus)) {
-        color: rgba(185, 52, 52, 1) !important;
-        background: #FFFFFF !important;
-     }
-     
-     ${Input}::placeholder {
-       color: rgba(185, 52, 52, 1) !important;
-     }
-     
-     ${Label}.valid {
-       opacity: 0 !important;
-     }
-     
-     ${Label}.invalid {
-        opacity: 1 !important;
-        top: 43px !important;
-        box-shadow: inset 0px -2.99387px 1.49693px rgba(0, 0, 0, 0.25);
-        color: rgba(185, 52, 52, 1) !important;
-     }
-  `}
-  
   ${Textarea}:placeholder-shown::placeholder,
   ${Input}:placeholder-shown::placeholder {
     opacity: 0;
     color: #000000;
-
-    ${({ invalid }) => invalid && 'opacity: 1;'
-};
   }
 
+  ${({ theme, invalid }) => invalid && css`
+    ${Input},
+    ${Input}:-webkit-autofill,
+    ${Input}:-webkit-autofill:hover,
+    ${Input}:-webkit-autofill:focus,
+    ${Input}:-webkit-autofill:active,
+    ${Input}:not(:placeholder-shown:not(:focus)) {
+      color: rgba(185, 52, 52, 1) !important;
+      -webkit-text-fill-color: rgba(185, 52, 52, 1) !important;
+      background: #FFFFFF !important;
+      //box-shadow: ${theme.forms.input.focus.boxShadow} !important;
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    }
+    
+    ${Input}::placeholder {
+      color: rgba(185, 52, 52, 1) !important;
+    }
+    
+    ${Label}.valid {
+      opacity: 0 !important;
+    }
+    
+    ${Label}.invalid {
+      opacity: 1 !important;
+      top: 43px !important;
+      box-shadow: inset 0px -2.99387px 1.49693px rgba(0, 0, 0, 0.25);
+      color: rgba(185, 52, 52, 1) !important;
+      
+      @media(max-width: 600px) {
+        top: 35px !important;
+      }
+    }
+
+    ${Textarea}:placeholder-shown::placeholder,
+    ${Input}:placeholder-shown::placeholder {
+      opacity: 1;
+    }
+  `}
 `;
