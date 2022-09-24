@@ -252,7 +252,9 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
             <Link
               href={defaultText.href}
             >
-              <Nav>{defaultText.link}</Nav>
+              <Nav
+                type={'button'}
+              >{defaultText.link}</Nav>
             </Link>
           </GridRow>
           <GridColumn>
@@ -266,6 +268,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
             href={'/'}
           >
             <Nav
+              type={'button'}
               withImage
             >
               Continue without log in
