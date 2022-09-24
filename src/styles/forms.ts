@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 export const Input = styled('input')`
   width: 100%;
   border: none;
-  //transition: all .2s linear;
+  transition: all .2s linear, background-color 1ms;
 
   :focus-visible {
     outline: none;
@@ -29,11 +29,14 @@ export const Input = styled('input')`
       padding: ${theme.forms.input.sizes.small.padding};
     }
 
-    :-webkit-autofill,
+    :-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px ${theme.forms.input.background} inset !important;
+    }
+    
     :-webkit-autofill:hover,
     :-webkit-autofill:focus,
     :-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 1000px ${theme.forms.input.background} inset !important;
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
     }
     
     :placeholder-shown:not(:focus) {
@@ -114,7 +117,7 @@ export const FormGroup = styled('div', {
 
   ${Input}:not(:-webkit-autofill) + ${Label} {
     opacity: 1;
-    transition: all .2s linear;
+    transition: all .2s linear, background-color 1ms;
   }
 
 
@@ -154,15 +157,16 @@ export const FormGroup = styled('div', {
   ${({ theme, invalid }) => invalid && css`
     ${Input},
     ${Input}:-webkit-autofill,
-    ${Input}:-webkit-autofill:hover,
-    ${Input}:-webkit-autofill:focus,
-    ${Input}:-webkit-autofill:active,
     ${Input}:not(:placeholder-shown:not(:focus)) {
-      color: rgba(185, 52, 52, 1) !important;
       -webkit-text-fill-color: rgba(185, 52, 52, 1) !important;
-      background: #FFFFFF !important;
-      //box-shadow: ${theme.forms.input.focus.boxShadow} !important;
       -webkit-box-shadow: 0 0 0 1000px white inset !important;
+      color: rgba(185, 52, 52, 1) !important;
+      background: #FFFFFF !important;
+      box-shadow: inset -0.819857px -0.819857px 3.27943px rgba(0, 0, 0, 0.45) !important;
+
+      @media (max-width: 600px) {
+        box-shadow: inset -1.49693px -1.49693px 5.98773px rgba(0, 0, 0, 0.45); !important;
+      }
     }
     
     ${Input}::placeholder {
@@ -181,6 +185,7 @@ export const FormGroup = styled('div', {
       
       @media(max-width: 600px) {
         top: 35px !important;
+        box-shadow: inset 0px -1.63971px 0.819857px rgba(0, 0, 0, 0.25);
       }
     }
 

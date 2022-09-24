@@ -63,7 +63,7 @@ export const theme = {
           fontSize: '16px',
           fontWeight: 300,
           borderRadius: '10px',
-          padding: '12px 13.5px'
+          padding: '12px 10px'
         }
       }
     }
