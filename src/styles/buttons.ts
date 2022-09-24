@@ -71,7 +71,7 @@ export const Button = styled('button', {
 })<ButtonProperties>`
   border: none;
   cursor: pointer;
-  transition: all .2s linear;
+  transition: all .1s linear;
   font-family: ${({ theme }) => theme.fontFamily};
 
   :focus-visible {
