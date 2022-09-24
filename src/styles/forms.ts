@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 export const Input = styled('input')`
   width: 100%;
   border: none;
-  transition: all .2s linear, background-color 1ms;
+  transition: all .2s linear, background 0ms;
 
   :focus-visible {
     outline: none;
@@ -117,7 +117,7 @@ export const FormGroup = styled('div', {
 
   ${Input}:not(:-webkit-autofill) + ${Label} {
     opacity: 1;
-    transition: all .2s linear, background-color 1ms;
+    transition: all .2s linear, background 0ms;
   }
 
 
@@ -154,12 +154,9 @@ export const FormGroup = styled('div', {
     color: #000000;
   }
 
-  ${({ theme, invalid }) => invalid && css`
-    ${Input},
-    ${Input}:-webkit-autofill,
-    ${Input}:not(:placeholder-shown:not(:focus)) {
-      -webkit-text-fill-color: rgba(185, 52, 52, 1) !important;
-      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  ${({ invalid }) => invalid && css`
+    ${Input}:not(:-webkit-autofill),
+    ${Input}:not(:placeholder-shown:not(:focus)):not(:-webkit-autofill) {
       color: rgba(185, 52, 52, 1) !important;
       background: #FFFFFF !important;
       box-shadow: inset -0.819857px -0.819857px 3.27943px rgba(0, 0, 0, 0.45) !important;
@@ -167,6 +164,13 @@ export const FormGroup = styled('div', {
       @media (max-width: 600px) {
         box-shadow: inset -1.49693px -1.49693px 5.98773px rgba(0, 0, 0, 0.45); !important;
       }
+    }
+    
+    ${Input}:-webkit-autofill,
+    ${Input}:-webkit-autofill:focus,
+    ${Input}:-webkit-autofill:active {
+      -webkit-text-fill-color: rgba(185, 52, 52, 1) !important;
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
     }
     
     ${Input}::placeholder {
