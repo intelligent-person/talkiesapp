@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - 'main'
-    types: 'closed'
+    types: [closed]
 jobs:
   vercel:
     runs-on: ubuntu-latest
@@ -34,3 +34,7 @@ jobs:
           vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORGID}}  #Required
           vercel-project-id: ${{ secrets.PROJECTID}}
+      - name: delete branch
+        uses: SvanBoxel/delete-merged-branch@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
