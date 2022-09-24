@@ -90,8 +90,8 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           overflow-y: auto;
           top: 0;
           left: 0;
-          height: 100%;
-          width: 100%;
+          height: 100vh;
+          width: 100vw;
           background-color: #161517;
           padding: 35px 20px 40px;
         `}
