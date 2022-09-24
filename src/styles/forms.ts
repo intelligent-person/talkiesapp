@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 export const Input = styled('input')`
   width: 100%;
   border: none;
+  margin: 0;
   transition: all .2s linear, background 0ms;
 
   :focus-visible {
@@ -19,12 +20,10 @@ export const Input = styled('input')`
     font-weight: ${theme.forms.input.fontWeight};
 
     font-size: ${theme.forms.input.sizes.default.fontSize};
-    line-height: ${theme.forms.input.sizes.default.lineHeight};
     border-radius: ${theme.forms.input.sizes.default.borderRadius};
 
     @media (max-width: 600px) {
       font-size: ${theme.forms.input.sizes.small.fontSize};
-      line-height: ${theme.forms.input.sizes.small.lineHeight};
       border-radius: ${theme.forms.input.sizes.small.borderRadius};
       padding: ${theme.forms.input.sizes.small.padding};
     }
@@ -43,13 +42,14 @@ export const Input = styled('input')`
       background: ${theme.forms.input.background};
     }
 
-    :hover {
-      background: ${theme.forms.input.hover.background} !important;
-      box-shadow: ${theme.forms.input.hover.boxShadow} !important;
-    }
-
-    :placeholder-shown:hover:not(:focus) + ${Label} {
-      background: #FFFFFF !important;
+    @media (min-width: 600px) {
+      :hover {
+        background: ${theme.forms.input.hover.background} !important;
+        box-shadow: ${theme.forms.input.hover.boxShadow} !important;
+      }
+      :placeholder-shown:hover:not(:focus) + ${Label} {
+        background: #FFFFFF !important;
+      }
     }
 
     :focus {
@@ -70,13 +70,11 @@ export const Label = styled('label')`
     font-weight: ${theme.forms.label.fontWeight};
     
     font-size: ${theme.forms.label.sizes.default.fontSize};
-    line-height: ${theme.forms.label.sizes.default.lineHeight};
     border-radius: ${theme.forms.label.sizes.default.borderRadius};
     padding: ${theme.forms.label.sizes.default.padding};
     
     @media(max-width: 600px) {
       font-size: ${theme.forms.label.sizes.small.fontSize};
-      line-height: ${theme.forms.label.sizes.small.lineHeight};
       border-radius: ${theme.forms.label.sizes.small.borderRadius};
       padding: ${theme.forms.label.sizes.small.padding};
     }
@@ -130,7 +128,6 @@ export const FormGroup = styled('div', {
     box-shadow: none;
     font-weight: 200;
     font-size: 22px;
-    line-height: 26px;
     color: #232323;
 
     @media(max-width: 600px) {
@@ -138,7 +135,6 @@ export const FormGroup = styled('div', {
       left: 14px;
       font-weight: 300;
       font-size: 16px;
-      line-height: 19.5px
     }
   }
 

@@ -108,7 +108,7 @@ export const theme = {
       sizes: {
         default: {
           fontSize: '14px',
-          lineHeight: '17.07px',
+          lineHeight: '27px',
           borderRadius: '12px',
           padding: '5px 10px'
         },
@@ -136,13 +136,11 @@ export const theme = {
       sizes: {
         default: {
           fontSize: '22px',
-          lineHeight: '26px',
           borderRadius: '12px',
           padding: '15px 25px'
         },
         small: {
           fontSize: '16px',
-          lineHeight: '19.5px',
           borderRadius: '10px',
           padding: '12px 14px'
         }
