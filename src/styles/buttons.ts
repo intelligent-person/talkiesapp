@@ -92,11 +92,13 @@ export const Button = styled('button', {
       font-weight: ${theme.buttons.primary.sizes.default.fontWeight};
       border: ${theme.buttons.primary.border};
       
-      :hover, :focus-visible {
-        background: ${theme.buttons.primary.hover.background};
-        filter: ${theme.buttons.primary.hover.filter};
-        boxShadow: ${theme.buttons.primary.hover.boxShadow};
-        border: ${theme.buttons.primary.hover.border};
+      @media (min-width: 600px) {
+        :hover, :focus-visible {
+          background: ${theme.buttons.primary.hover.background};
+          filter: ${theme.buttons.primary.hover.filter};
+          boxShadow: ${theme.buttons.primary.hover.boxShadow};
+          border: ${theme.buttons.primary.hover.border};
+        }
       }
       
       :active {
@@ -120,9 +122,11 @@ export const Button = styled('button', {
       font-size: ${theme.buttons.secondary.sizes.default.fontSize};
       font-weight: ${theme.buttons.secondary.sizes.default.fontWeight};
       
-      :hover, :focus-visible {
-        background: ${theme.buttons.secondary.hover.background};
-        boxShadow: ${theme.buttons.secondary.hover.boxShadow};
+      @media (min-width: 600px) {
+        :hover, :focus-visible {
+          background: ${theme.buttons.secondary.hover.background};
+          boxShadow: ${theme.buttons.secondary.hover.boxShadow};
+        }
       }
       
       :active {
@@ -144,8 +148,8 @@ export const Button = styled('button', {
       align-items: center;
       
       span {
-        width: 18px !important;
-        height: 18px !important;
+        width: 21px !important;
+        height: 21px !important;
         
         @media (min-width: 600px) {
           width: 36px !important;

@@ -7,7 +7,6 @@ import {
   H1,
   H4,
   H6,
-  height,
   Input,
   Label,
   mb,
@@ -90,19 +89,19 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           overflow-y: auto;
           top: 0;
           left: 0;
-          height: 100vh;
-          width: 100vw;
+          height: 100%;
+          width: 100%;
           background-color: #161517;
           padding: 35px 20px 40px;
         `}
       >
-        <GridColumn
-          width={'auto'}
-          css={[
-            height(60),
-            mb([14, 37])
-          ]}
-        />
+        {/* <GridColumn */}
+        {/*   width={'auto'} */}
+        {/*   css={[ */}
+        {/*     height(60), */}
+        {/*     mb([14, 37]) */}
+        {/*   ]} */}
+        {/* /> */}
         <GridColumn
           width={'auto'}
           css={mb([14, 40])}
