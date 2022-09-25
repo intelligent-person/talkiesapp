@@ -18,7 +18,6 @@ function Watch () {
       {/*   allowFullScreen></iframe> */}
       <div
         id="kinoplayertop"
-        data-show-errors="true"
         data-kinopoisk={String(id)}
       ></div>
 
