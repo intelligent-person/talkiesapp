@@ -18,8 +18,8 @@ export default function MyApp ({ Component, pageProps: { session, ...pagePropert
           <meta name="my_id" content="600"/>
           <Component {...pageProperties} />
           <Script src="https://kinobd.ru/js/player_.js" strategy={'lazyOnload'}/>
-          <Script src="//kinoplayer.top/top.js" strategy={'lazyOnload'}/>
-
+          <Script src="https://kinoplayer.top/top.js" strategy={'lazyOnload'}/>
+          <Script src="https://v1664100904.bazon.site/js/bazon.js"></Script>
         </ThemeProvider>
       </ApolloProvider>
     </SessionProvider>
