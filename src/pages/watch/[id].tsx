@@ -20,7 +20,15 @@ function Watch () {
         id="kinoplayertop"
         data-kinopoisk={String(id)}
       ></div>
-
+      <div
+        id="bazon"
+        data-width="500"
+        data-height="500"
+        data-kinopoisk={id}
+        // data-replace=""
+        // data-calback=""
+        // data-calback_found=""
+      ></div>
     </div>
   );
 }
