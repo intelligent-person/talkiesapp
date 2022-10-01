@@ -95,13 +95,12 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           padding: 35px 20px 40px;
         `}
       >
-        {/* <GridColumn */}
-        {/*   width={'auto'} */}
-        {/*   css={[ */}
-        {/*     height(60), */}
-        {/*     mb([14, 37]) */}
-        {/*   ]} */}
-        {/* /> */}
+        <GridColumn
+          width={'auto'}
+          css={[
+            mb([0, 100, 120])
+          ]}
+        />
         <GridColumn
           width={'auto'}
           css={mb([14, 40])}
