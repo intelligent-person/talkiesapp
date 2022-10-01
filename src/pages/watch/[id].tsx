@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 
 function Watch () {
   const { query: { id } } = useRouter();
@@ -6,6 +7,14 @@ function Watch () {
 
   return (
     <div>
+      {/* <div > */}
+      {/*   <button data-click-kinoplayer="kinoplayertop" >Терминатор</button> */}
+      {/* </div> */}
+
+      <div>
+        <div id="kinoplayertop" data-kinopoisk="444"></div>
+      </div>
+
       <div
         id="kinobd"
         data-resize="1"
@@ -29,6 +38,20 @@ function Watch () {
         // data-calback=""
         // data-calback_found=""
       ></div>
+      <iframe
+        title={'film'}
+        src={`https://v1664100904.bazon.site/kp/${String(id)}`}
+        frameBorder="0"
+        scrolling="no"
+        allowFullScreen={true}
+        referrerPolicy="origin"
+        width="800"
+        height="452"
+      ></iframe>
+      <div className="uitools" id="videoplayers"
+        css={
+          css`height:370px;width:610px;background-image: url('//pleer.videoplayers.club/web/img/loader.gif');background-repeat: no-repeat;background-position: center;background-color: #ccc;
+      `}></div>
     </div>
   );
 }
