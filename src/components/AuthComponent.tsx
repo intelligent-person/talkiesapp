@@ -1,24 +1,6 @@
 import { GridColumn, GridRow } from 'emotion-flex-grid';
 import { css } from '@emotion/react';
-import {
-  Button, display,
-  FormGroup,
-  gridGap,
-  H1,
-  H4,
-  H6,
-  Input,
-  Label,
-  mb,
-  Nav,
-  uppercase,
-  width,
-  p, flexDirection
-} from '../styles';
-import Google from 'public/img/icons/google.svg';
-import Github from 'public/img/icons/github.svg';
-import ArrowRight from 'public/img/icons/arrow_right.svg';
-import Image from 'next/image';
+import { Button, display, FormGroup, gridGap, H1, H4, H6, Input, Label, mb, Nav, uppercase, width, p, flexDirection } from '../styles';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { FC, useCallback, useEffect } from 'react';
@@ -29,6 +11,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '../validation';
 import { AuthComponentProperties } from '../types';
 import { signIn } from 'next-auth/react';
+import { BsChevronRight } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 
 const captions = {
   login: {
@@ -50,7 +35,6 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
   const { type = 'login', mutationError, mutation } = props;
 
   const router = useRouter();
-
   const defaultText = captions[type];
 
   const {
@@ -64,6 +48,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
     resolver: zodResolver(authSchema),
     mode: 'onSubmit'
   });
+
   const onSubmit = useCallback(({ email, password }) => {
     mutation({
       variables: {
@@ -144,10 +129,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
                 flexDirection(['row-reverse', 'row'])
               ]}
             >
-              <Image
-                src={Google}
-                alt={'Google'}
-              />
+              <FcGoogle/>
               <div>
                 Sign in with{' '}
                 <div
@@ -165,10 +147,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
                 flexDirection(['row-reverse', 'row'])
               ]}
             >
-              <Image
-                src={Github}
-                alt={'Github'}
-              />
+              <FaGithub/>
               <div>
                 Sign in with{' '}
                 <div
@@ -194,7 +173,6 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
               id={'email'}
               type={'email'}
               placeholder={'Enter your email'}
-              invalid={!!errors?.email}
               {...register('email')}
             />
             <Label
@@ -219,7 +197,6 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
               id={'password'}
               type={'password'}
               placeholder={'Enter your password'}
-              invalid={!!errors?.password}
               {...register('password', {
                 maxLength: { value: 20, message: 'lox' }
               })}
@@ -267,10 +244,10 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           >
             <Nav
               type={'button'}
-              withImage
+              withIcon
             >
               Continue without log in
-              <Image src={ArrowRight}/>
+              <BsChevronRight />
             </Nav>
           </Link>
         </GridColumn>

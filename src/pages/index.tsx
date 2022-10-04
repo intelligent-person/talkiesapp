@@ -1,45 +1,49 @@
-import Link from 'next/link';
-import { Nav, Button, H1 } from '../styles';
-import { useAuth } from '../hooks/useAuth';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { LOGOUT_MUTATION } from '../types';
-import { useCallback } from 'react';
-import { signOut } from 'next-auth/react';
+import { getGenres, getTrending } from '../clientAPI/axios';
+import HeaderComponent from '../components/HeaderComponent';
+import { getAuthorizedUser } from '../auth';
+import { GridRow } from 'emotion-flex-grid';
+import TrendingComponent from '../components/TrendingComponent';
+import { css } from '@emotion/react';
+import { wrapper } from '../store/store';
+import { setGenres } from '../store/reducers/genresReducer';
+import { HomeComponentProperties } from '../types';
+import { FC } from 'react';
 
-function Home () {
-  const { loading, currentUser } = useAuth();
-  const { mutation } = useAuthMutation('logout', LOGOUT_MUTATION);
-  const signOutClick = useCallback(async () => {
-    await (currentUser?.provider === 'email' ? mutation() : signOut());
-  }, [currentUser?.provider, mutation]);
-
-  if (loading) return <p>Loading...</p>;
-
-  if (!currentUser) {
-    return (<div>
-      <Link
-        href={'/signup'}
-      >
-        <Nav
-        >Signup</Nav>
-      </Link>
-      <Link
-        href={'/login'}
-      >
-        <Nav
-        >Login</Nav>
-      </Link>
-    </div>);
-  }
-
+const Home: FC<HomeComponentProperties> = (props) => {
+  const { trendingFilms, currentUser } = props;
   return (
-    <div>
-      <H1>Welcome back, {currentUser?.email}</H1>
-      <Button
-        onClick={signOutClick}
-      >Logout</Button>
-    </div>
+    <GridRow
+      direction={'column'}
+      css={css`
+        background-color: #161517;
+        height: 100vh;
+      `}
+    >
+      <HeaderComponent
+        currentUser={currentUser}
+      />
+      <TrendingComponent
+        trendingFilms={trendingFilms}
+      />
+    </GridRow>
   );
-}
+};
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => {
+    return async ({ req }) => {
+      const currentUser = await getAuthorizedUser(req);
+      const { data: trendingFilms } = await getTrending('movie', 'week');
+      const { data: { genres } } = await getGenres();
+      await store.dispatch(setGenres(genres));
+
+      return {
+        props: {
+          trendingFilms,
+          currentUser: JSON.parse(JSON.stringify(currentUser))
+        }
+      };
+    };
+  });
 
 export default Home;

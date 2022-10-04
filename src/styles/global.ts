@@ -4,6 +4,7 @@ export const globalCSS = css`
   body {
     margin: 0;
     background: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
   }
 
   *,
