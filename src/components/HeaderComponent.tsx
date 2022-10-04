@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { HeaderComponentProperties } from '../types';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { MdAutoAwesomeMotion, MdHomeFilled, MdLogin, MdLogout } from 'react-icons/md';
 
 const LOGOUT_MUTATION = gql`
   mutation {
@@ -88,10 +89,12 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
               >
                 <Nav
                   withIcon
+                  tab
                 >
                   <span className="material-symbols-outlined">
                     home
                   </span>
+                  <MdHomeFilled className={'hover'}/>
                   Home
                 </Nav>
               </Link>
@@ -104,10 +107,12 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
               >
                 <Nav
                   withIcon
+                  tab
                 >
                   <span className="material-symbols-outlined">
                     auto_awesome_motion
                   </span>
+                  <MdAutoAwesomeMotion className={'hover'}/>
                   Discovery
                 </Nav>
               </Link>
@@ -118,12 +123,14 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
                 width={'auto'}
               >
                 <Nav
+                  tab
                   withIcon
                   onClick={signOutClick}
                 >
                   <span className="material-symbols-outlined">
                     logout
                   </span>
+                  <MdLogout className={'hover'}/>
                   Logout
                 </Nav>
               </GridColumn>
@@ -134,11 +141,13 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
                   href={'/login'}
                 >
                   <Nav
+                    tab
                     withIcon
                   >
                     <span className="material-symbols-outlined">
                       login
                     </span>
+                    <MdLogin className={'hover'}/>
                     Sign In
                   </Nav>
                 </Link>

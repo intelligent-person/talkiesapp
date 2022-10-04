@@ -6,7 +6,7 @@ import { Button } from './buttons';
 import { Label } from './forms';
 
 export const Header = styled('div')`
-  padding: 35px 30px;
+  padding: 20px 30px;
   background: rgba(62, 62, 62, 1);
   backdrop-filter: blur(50px);
 `;
@@ -46,7 +46,29 @@ export const TrendingMovie = styled('div', {
   }
   
   p {
+    transition: all .2s linear;
     margin-bottom: 20px;
+    overflow-y: hidden;
+    
+    :hover {
+      overflow-y: auto;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: rgba(231, 231, 231, 0.3);
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #E7E7E7;
+      border-radius: 10px;
+    }
   }
   
   ${H4} {

@@ -15,7 +15,7 @@ export const animated = css`
 
 export const fadeInAnimation = keyframes`
   from {
-    opacity: 0;
+    opacity: .3;
   }
 
   to {

@@ -14,7 +14,7 @@ const CarouselArrowComponent: FC<CarouselArrowComponentProperties> = (props) => 
       css={css`
         position: absolute;
         top: 50%;
-        left: calc(${isLeft ? '50% - 400px' : '50% + 400px'});
+        left: calc(${isLeft ? '50% - 380px' : '50% + 380px'});
         transform: translate(${isLeft ? '-30%' : '-80%'}, -50%);
         z-index: 10010;
         background: rgba(231, 231, 231, 0.1);
