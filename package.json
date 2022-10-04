@@ -12,7 +12,7 @@
     "lint:fix": "npm run eslint:fix",
     "eslint": "eslint 'src/**/*.ts' 'src/**/*.tsx'",
     "eslint:fix": "eslint --fix 'src/**/*.ts' 'src/**/*.tsx' 'graphql/types/*.ts'",
-    "prepare": "husky install",
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install",
     "test": "npm run lint"
   },
   "dependencies": {
