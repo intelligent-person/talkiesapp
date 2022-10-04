@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@auth0/nextjs-auth0": "^1.9.1",
     "@babel/core": "^7.19.3",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -35,6 +36,7 @@
     "graphql": "^16.6.0",
     "graphql-iso-date": "^3.6.1",
     "jsonwebtoken": "^8.5.1",
+    "micro": "^9.4.1",
     "micro-cors": "^0.1.1",
     "next": "^12.0.7",
     "next-redux-wrapper": "^8.0.0-rc.1",
