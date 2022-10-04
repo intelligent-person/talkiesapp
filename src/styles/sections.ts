@@ -5,15 +5,13 @@ export const TrendingSection = styled('section')`
   position: relative;
 
   .slick-slide {
-    width: 740px;
+    width: 700px;
     padding: 64px 30px;
     height: auto;
     transition: all .2s;
 
     p {
-      max-height: 150px;
-      overflow-y: auto;
-      transition: all .2s linear;
+      max-height: 130px;
     }
   }
   
@@ -28,7 +26,7 @@ export const TrendingSection = styled('section')`
     }
 
     p {
-      max-height: 190px;
+      max-height: 170px;
     }
   }
   

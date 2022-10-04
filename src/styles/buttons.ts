@@ -1,12 +1,16 @@
 import styled from '@emotion/styled';
 import { filterProperties } from './helpers';
+import { css } from '@emotion/react';
+import { fadeIn, fadeOut } from './animations';
 
 interface NavProperties {
   withIcon?: boolean
+  tab?: boolean
 }
 
 const NavForwardProperties = new Set([
-  'withIcon'
+  'withIcon',
+  'tab'
 ]);
 
 export const Nav = styled('a', {
@@ -30,12 +34,12 @@ export const Nav = styled('a', {
     border-image: linear-gradient(to right, rgba(231, 231, 231, 0), rgba(231, 231, 231, 1), rgba(231, 231, 231, 0)) 100% 0;
   }
   
-  ${({ theme }) => `
+  ${({ theme }) => css`
     color: ${theme.colors.primary};
     font-family: ${theme.fontFamily};
   `}
   
-  ${({ withIcon }) => withIcon && `
+  ${({ withIcon }) => withIcon && css`
     display: flex;
     padding: 0;
     width: fit-content;
@@ -46,6 +50,36 @@ export const Nav = styled('a', {
     span, svg {
       @media (min-width: 600px) {
         font-size: 36px;
+      }
+    }
+  `}
+  
+  ${({ tab }) => tab && css`
+    display: flex;
+    padding: 5px 16px;
+    width: fit-content;
+    align-items: center;
+    margin: 0 auto;
+    grid-gap: 5px;
+    border-radius: 12px;
+    transition: all .3s linear;
+
+    .hover {
+      display: none;
+      ${fadeIn};
+    }
+    
+    :hover {
+      background: rgba(231, 231, 231, 0.25);
+      border-image: none;
+      
+      span {
+        display: none;
+        ${fadeOut};
+      }
+      
+      .hover {
+        display: block;
       }
     }
   `}
