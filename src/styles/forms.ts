@@ -94,7 +94,7 @@ export const FormGroup = styled('div', {
 })<FormGroupProperties>`
   position: relative;
   margin-bottom: 35px;
-
+  
   @media(max-width: 600px) {
     margin-bottom: 20px;
   }
@@ -106,6 +106,7 @@ export const FormGroup = styled('div', {
     background: #FFFFFF;
     box-shadow: inset 0px 2.99387px 2.99387px rgba(0, 0, 0, 0.15);
     opacity: 0;
+    cursor: text;
     
     @media(max-width: 600px) {
       top: -10px;
@@ -194,4 +195,62 @@ export const FormGroup = styled('div', {
       opacity: 1;
     }
   `}
+`;
+
+export const SearchForm = styled('div')<FormGroupProperties>`
+  position: relative;
+
+  ${Input}::-webkit-search-decoration,
+  ${Input}::-webkit-search-cancel-button,
+  ${Input}::-webkit-search-results-button,
+  ${Input}::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  ${Label} {
+    position: absolute;
+    top: 8px;
+    right: 25px;
+    padding: 0;
+    left: initial;
+    box-shadow: none;
+    cursor: pointer;
+    
+    span {
+      font-size: 40px;
+    }
+    
+    div {
+      display: none
+    }
+  }
+
+  ${Input}:not(:-webkit-autofill) + ${Label} {
+    opacity: 1;
+    transition: all .2s linear, background 0ms;
+  }
+
+
+  ${Input}:placeholder-shown:not(:focus) + ${Label} {
+    display: flex;
+    align-items: center;
+    top: 8px;
+    right: 50%;
+    left: initial;
+    transform: translate(50%, 0);
+    grid-gap: 5px;
+    cursor: text;
+    font-weight: 500;
+    font-size: 20px;
+    
+    div {
+      display: inline-flex;
+    }
+  }
+
+  ${Textarea}:placeholder-shown::placeholder,
+  ${Input}:placeholder-shown::placeholder {
+    opacity: 0;
+    color: #000000;
+  }
 `;

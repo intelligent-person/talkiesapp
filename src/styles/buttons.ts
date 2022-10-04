@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import { filterProperties } from './helpers';
 
 interface NavProperties {
-  withImage?: boolean
+  withIcon?: boolean
 }
 
 const NavForwardProperties = new Set([
-  'withImage'
+  'withIcon'
 ]);
 
 export const Nav = styled('a', {
@@ -35,20 +35,17 @@ export const Nav = styled('a', {
     font-family: ${theme.fontFamily};
   `}
   
-  ${({ withImage }) => withImage && `
+  ${({ withIcon }) => withIcon && `
     display: flex;
     padding: 0;
     width: fit-content;
     align-items: center;
     margin: 0 auto;
+    grid-gap: 5px;
     
-    span {
-      width: 22px !important;
-      height: 22px !important;
-     
+    span, svg {
       @media (min-width: 600px) {
-        width: 36px !important;
-        height: 36px !important;
+        font-size: 36px;
       }
     }
   `}
@@ -57,12 +54,16 @@ export const Nav = styled('a', {
 interface ButtonProperties {
   primary?: boolean
   secondary?: boolean
+  watch?: boolean
+
   withIcon?: boolean
 }
 
 const ButtonForwardProperties = new Set([
   'primary',
   'secondary',
+  'watch',
+
   'withIcon'
 ]);
 
@@ -142,18 +143,40 @@ export const Button = styled('button', {
       }
   `}
   
+  ${({ theme, watch }) => watch && `
+      background: ${theme.buttons.watch.background};
+      color: ${theme.buttons.watch.color};
+      border: ${theme.buttons.watch.border};
+      border-radius: ${theme.buttons.watch.sizes.default.borderRadius};
+      padding: ${theme.buttons.watch.sizes.default.padding};
+      font-size: ${theme.buttons.watch.sizes.default.fontSize};
+      font-weight: ${theme.buttons.watch.sizes.default.fontWeight};
+      
+      @media (min-width: 600px) {
+        :hover, :focus-visible {
+          background: ${theme.buttons.watch.hover.background};
+        }
+      }
+      
+      :active {
+        background: ${theme.buttons.watch.active.background};
+        color: ${theme.buttons.watch.active.color};
+        border: ${theme.buttons.watch.active.border};
+      }
+  `}
+  
   ${({ withIcon }) => withIcon && `
       display: flex;
       justify-content: space-between;
       align-items: center;
       
-      span {
-        width: 21px !important;
-        height: 21px !important;
+      svg {
+        width: 18px !important;
+        height: 18px !important;
         
         @media (min-width: 600px) {
-          width: 36px !important;
-          height: 36px !important;
+          width: 33px !important;
+          height: 33px !important;
         }
       }
   `}

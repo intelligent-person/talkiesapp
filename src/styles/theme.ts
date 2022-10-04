@@ -66,6 +66,27 @@ export const theme = {
           padding: '12px 10px'
         }
       }
+    },
+    watch: {
+      background: 'rgba(0, 0, 0, 0.5)',
+      color: 'rgba(255, 255, 255, 1)',
+      border: '1px solid #FFFFFF',
+      hover: {
+        background: 'rgba(62, 62, 62, 1)'
+      },
+      active: {
+        background: '#E7E7E7',
+        color: '#161517',
+        border: '1px solid #161517'
+      },
+      sizes: {
+        default: {
+          fontSize: '22px',
+          fontWeight: 700,
+          borderRadius: '12px',
+          padding: '10px 22px'
+        }
+      }
     }
   },
   typeface: {
@@ -131,7 +152,7 @@ export const theme = {
       focus: {
         background: '#FFFFFF',
         color: '#000000',
-        boxShadow: 'inset -1.49693px -1.49693px 5.98773px rgba(0, 0, 0, 0.45)'
+        boxShadow: 'inset -1.49693px -1.49693px 5.98773px rgba(0, 0, 0, 1)'
       },
       sizes: {
         default: {
