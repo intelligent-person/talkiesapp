@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "vercel-build": "npm run prisma:generate && next build",
-    "prisma:generate": "PRISMA_CLIENT_ENGINE_TYPE=\"dataproxy\" prisma generate",
+    "prisma:generate": "PRISMA_CLIENT_ENGINE_TYPE=\"dataproxy\" npx prisma generate",
     "lint": "npm run eslint",
     "lint:fix": "npm run eslint:fix",
     "eslint": "eslint 'src/**/*.ts' 'src/**/*.tsx'",
