@@ -34,7 +34,9 @@ export async function getServerSideProps (context: NextPageContext) {
 
   if (currentUser) {
     return {
-      redirect: { destination: '/' }
+      redirect: {
+        destination: '/'
+      }
     };
   }
 
