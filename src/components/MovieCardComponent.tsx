@@ -19,7 +19,7 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
 
   return (
     <TrendingMovie
-      bgcSrc={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+      bgcSrc={`https://image.tmdb.org/t/p/w500/${String(movie.poster_path)}`}
     >
       <GridRow
         css={css`
@@ -33,9 +33,9 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
         >
           <Image
             loader={({ src, width, quality }) => {
-              return `https://image.tmdb.org/t/p/w500${movie.poster_path}?w=${width}&q=${quality ?? 75}`;
+              return `https://image.tmdb.org/t/p/w500${String(movie.poster_path)}?w=${width}&q=${quality ?? 75}`;
             }}
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${String(movie.poster_path)}`}
             layout="responsive"
             width={'410px'}
             height={'606px'}
