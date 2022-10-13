@@ -27,6 +27,10 @@ const CarouselArrowComponent: FC<CarouselArrowComponentProperties> = (props) => 
         :hover {
           background: rgba(231, 231, 231, 0.3);
         }
+        
+        @media (max-width: 600px) {
+          display: none;
+        }
       `}
     >
       {isLeft
