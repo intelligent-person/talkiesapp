@@ -8,6 +8,7 @@ export const User = objectType({
     t.nonNull.string('email');
     t.string('password');
     t.string('provider');
+    // @ts-expect-error
     t.dateTime('createdAt');
     t.string('image');
   }

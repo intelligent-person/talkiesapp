@@ -9,18 +9,18 @@ import Script from 'next/script';
 import { wrapper } from '../store/store';
 import { Provider } from 'react-redux';
 
-function MyApp ({ Component, pageProps: { session, ...pageProperties } }: AppProps) {
-  const { store, props } = wrapper.useWrappedStore(pageProperties);
+function MyApp ({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest);
 
   return (
     <Provider store={store}>
-      <SessionProvider session={session}>
+      <SessionProvider >
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <Global
               styles={globalCSS}
             />
-            <Component {...props} />
+            <Component {...props.pageProps} />
             <meta name="my_id" content="600"/>
             <Script src="https://kinobd.ru/js/player_.js" strategy={'lazyOnload'}/>
             <Script src="https://kinoplayer.top/top.js" strategy={'lazyOnload'}/>

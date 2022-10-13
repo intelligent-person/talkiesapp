@@ -1,29 +1,31 @@
 import { mq } from './helpers';
 
-export const width = width => mq({
+type Arguments = string | string[] | number | number[]
+
+export const width = (width: Arguments) => mq({
   width
 });
 
-export const height = height => mq({
+export const height = (height: Arguments) => mq({
   height
 });
 
-export const minHeight = height => mq({
+export const minHeight = (height: Arguments) => mq({
   minHeight: height
 });
 
-export const minWidth = width => mq({
+export const minWidth = (width: Arguments) => mq({
   minWidth: width
 });
 
-export const maxHeight = height => mq({
+export const maxHeight = (height: Arguments) => mq({
   maxHeight: height
 });
 
-export const maxWidth = width => mq({
+export const maxWidth = (width: Arguments) => mq({
   maxWidth: width
 });
 
-export const bgs = backgroundSize => mq({
+export const bgs = (backgroundSize: Arguments) => mq({
   backgroundSize
 });

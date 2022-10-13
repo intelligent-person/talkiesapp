@@ -98,7 +98,7 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
           width={'auto'}
           textAlign={'center'}
           css={[
-            width(['100%', 637]),
+            width(['100%', '637px']),
             p(['28px 14px', '15px 37px']),
             css`
             background: rgba(134, 134, 134, 0.4);

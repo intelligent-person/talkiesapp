@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
-import { filterProperties } from './helpers';
+import { br, filterProperties } from './helpers';
 import { css } from '@emotion/react';
 import { fadeIn, fadeOut } from './animations';
+import { fontSize } from './text';
+import { p } from './paddings';
 
 interface NavProperties {
   withIcon?: boolean
@@ -17,17 +19,15 @@ export const Nav = styled('a', {
   shouldForwardProp: filterProperties(NavForwardProperties)
 })<NavProperties>`
   font-weight: 500;
-  font-size: 20px;
   padding: 5px;
   text-decoration: none;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-color: transparent;
   cursor: pointer;
-  
-  @media (max-width: 600px) {
-    font-size: 12px;
-  }
+  ${[
+    fontSize(['12px', '16px', '20px'])
+  ]}
 
   :hover {
     color: #FFFFFF;
@@ -48,21 +48,22 @@ export const Nav = styled('a', {
     grid-gap: 5px;
     
     span, svg {
-      @media (min-width: 600px) {
-        font-size: 36px;
-      }
+      ${[fontSize(['22px', '36px'])]}
     }
   `}
   
   ${({ tab }) => tab && css`
     display: flex;
-    padding: 5px 16px;
     width: fit-content;
     align-items: center;
     margin: 0 auto;
     grid-gap: 5px;
     border-radius: 12px;
     transition: all .3s linear;
+    ${[
+    p(['2px 4px', '5px 8px', '5px 16px']),
+    br([7, 10, 12])
+  ]}
 
     .hover {
       display: none;
@@ -186,16 +187,23 @@ export const Button = styled('button', {
       font-size: ${theme.buttons.watch.sizes.default.fontSize};
       font-weight: ${theme.buttons.watch.sizes.default.fontWeight};
       
+      :active {
+        background: ${theme.buttons.watch.active.background};
+        color: ${theme.buttons.watch.active.color};
+        border: ${theme.buttons.watch.active.border};
+      }
+      
       @media (min-width: 600px) {
         :hover, :focus-visible {
           background: ${theme.buttons.watch.hover.background};
         }
       }
       
-      :active {
-        background: ${theme.buttons.watch.active.background};
-        color: ${theme.buttons.watch.active.color};
-        border: ${theme.buttons.watch.active.border};
+      @media (max-width: 600px) {
+        border-radius: ${theme.buttons.watch.sizes.small.borderRadius};
+        padding: ${theme.buttons.watch.sizes.small.padding};
+        font-size: ${theme.buttons.watch.sizes.small.fontSize};
+        font-weight: ${theme.buttons.watch.sizes.small.fontWeight};
       }
   `}
   

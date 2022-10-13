@@ -1,7 +1,6 @@
-import { TrendingMovie, p, H4, GenreCard, gridGap, Button, Label } from '../styles';
+import { TrendingMovie, p, H4, GenreCard, gridGap, Button, Label, mb } from '../styles';
 import Image from 'next/image';
 import { GridColumn, GridRow } from 'emotion-flex-grid';
-import { css } from '@emotion/react';
 import { useSelector } from '../store/store';
 import { FC, useMemo } from 'react';
 import { MdDateRange, MdStarPurple500 } from 'react-icons/md';
@@ -13,7 +12,7 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
 
   const allGenres = useSelector(({ genres }) => genres);
   const movieGenre = useMemo(() => {
-    const result = allGenres.filter(genre => movie.genre_ids.includes(genre.id));
+    const result = allGenres.filter(genre => movie.genre_ids.slice(0, 2).includes(genre.id));
     return result;
   }, [allGenres, movie.genre_ids]);
 
@@ -22,13 +21,10 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
       bgcSrc={`https://image.tmdb.org/t/p/w500/${String(movie.poster_path)}`}
     >
       <GridRow
-        css={css`
-          -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
-          border-radius: 20px;
-        `}
+        className={'backdrop-filter'}
       >
         <GridColumn
+          display={['none', 'block']}
           width={6}
         >
           <Image
@@ -43,12 +39,16 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
           />
         </GridColumn>
         <GridColumn
-          width={6}
-          css={[p('45px 35px 15px')]}
+          align={'end'}
+          width={[12, 6]}
+          css={[p(['14px', '45px 35px 15px'])]}
         >
           <H4>{movie.title}</H4>
           <GridRow
-            css={gridGap(20)}
+            css={[
+              mb([8, 20]),
+              gridGap(20)
+            ]}
           >
             <time
               dateTime={movie.release_date}
@@ -75,9 +75,9 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
           </GridRow>
           <p>{movie.overview}</p>
           <GridRow
-            justify={'end'}
-            wrap={'wrap'}
-            css={gridGap('15px 20px')}
+            justify={['start', 'end']}
+            wrap={['nowrap', 'wrap']}
+            css={[gridGap('15px 20px')]}
           >
             {movieGenre.map(genre => <GenreCard
               key={genre.id}
@@ -86,7 +86,7 @@ const MovieCardComponent: FC<MovieCardComponentProperties> = (props) => {
             </GenreCard>)}
           </GridRow>
           <GridRow
-            justify={'end'}
+            justify={['start', 'end']}
           >
             <Button
               watch

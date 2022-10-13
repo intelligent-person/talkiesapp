@@ -3,6 +3,7 @@ import { Context } from '../context/context';
 import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { ApolloError } from 'apollo-server-micro';
+import { User } from '@prisma/client';
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -63,7 +64,7 @@ export const Mutation = mutationType({
             provider: 'email'
           }
         });
-        const token = sign({ userId: user?.id }, process.env.APP_SECRET);
+        const token = sign({ userId: user?.id }, process.env.APP_SECRET ?? '');
         context.setCookies('token', token);
 
         return {
@@ -79,7 +80,7 @@ export const Mutation = mutationType({
         password: nonNull(stringArg())
       },
       async resolve (_, arguments_, context: Context) {
-        const user = await context.prisma.user.findUnique({
+        const user: User | null = await context.prisma.user.findUnique({
           where: {
             isUserExists: {
               email: arguments_.email,
@@ -97,7 +98,7 @@ export const Mutation = mutationType({
             });
         }
 
-        const valid = await compare(arguments_.password, user.password);
+        const valid = await compare(arguments_.password, user.password as string);
         if (!valid) {
           throw new ApolloError(
             'Invalid password',
@@ -107,7 +108,7 @@ export const Mutation = mutationType({
             });
         }
 
-        const token = sign({ userId: user.id }, process.env.APP_SECRET/* { expiresIn: 86400 * 30 } */);
+        const token = sign({ userId: user.id }, process.env.APP_SECRET ?? '');
         context.setCookies('token', token);
 
         return {
