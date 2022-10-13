@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { mq } from './helpers';
+import { AllArguments, mq, OnlyStrings } from './helpers';
 
 export const textNowrap = css`
   white-space: nowrap;
@@ -13,17 +13,17 @@ export const textCenter = css`
   text-align: center !important;
 `;
 
-export const textDecoration = decoration => mq({
+export const textDecoration = (decoration: OnlyStrings) => mq({
   textDecoration: decoration
 });
 
-export const textTransform = transform => mq({
+export const textTransform = (transform: OnlyStrings) => mq({
   textTransform: transform
 });
 
-export const fontWeight = fontWeight => mq({ fontWeight });
+export const fontWeight = (fontWeight: AllArguments) => mq({ fontWeight });
 
-export const lineHeight = lineHeight => mq({ lineHeight });
+export const lineHeight = (lineHeight: AllArguments) => mq({ lineHeight });
 
 export const textDecorationNone = css`
   &,
@@ -43,17 +43,17 @@ export const textWhite = css`
   }
 `;
 
-export const fontSize = fontSize => mq({ fontSize });
+export const fontSize = (fontSize: AllArguments) => mq({ fontSize });
 
-export const fontStyle = fontStyle => mq({ fontStyle });
+export const fontStyle = (fontStyle: AllArguments) => mq({ fontStyle });
 
-export const letterSpacing = letterSpacing => mq({ letterSpacing });
+export const letterSpacing = (letterSpacing: AllArguments) => mq({ letterSpacing });
 
 export const ellipsis = css`
   text-overflow: ellipsis;
 `;
 
-export const color = color => mq({ color });
+export const color = (color: OnlyStrings) => mq({ color });
 
 export const uppercase = css`
   &, button {
@@ -66,4 +66,4 @@ export const capitalize = css`
     text-transform: capitalize !important;
   }
 `;
-export const whiteSpace = whiteSpace => mq({ whiteSpace });
+export const whiteSpace = (whiteSpace: AllArguments) => mq({ whiteSpace });

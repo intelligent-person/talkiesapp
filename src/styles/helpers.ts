@@ -2,65 +2,68 @@ import { css } from '@emotion/react';
 import facepaint from 'facepaint';
 import { theme } from './theme';
 
+export type OnlyStrings = string | string[]
+export type AllArguments = number | number[] | OnlyStrings
+
 export const mq = facepaint(Object.values(theme.breakpoints).map(
   breakpoint => `@media(min-width: ${breakpoint}px)`
 ), { overlap: true });
 
-export const display = display => mq({
+export const display = (display: OnlyStrings) => mq({
   display
 });
 
-export const visibility = visibility => mq({
+export const visibility = (display: OnlyStrings) => mq({
   visibility
 });
 
-export const verticalAlign = align => mq({
+export const verticalAlign = (align: OnlyStrings) => mq({
   verticalAlign: align
 });
 
-export const textAlign = align => mq({
+export const textAlign = (align: OnlyStrings) => mq({
   textAlign: align
 });
 
-export const bgc = color => mq({
+export const bgc = (color: OnlyStrings) => mq({
   backgroundColor: color
 });
 
-export const br = radius => mq({
+export const br = (radius: AllArguments) => mq({
   borderRadius: radius
 });
 
-export const border = border => mq({
+export const border = (display: OnlyStrings) => mq({
   border
 });
 
-export const borderTop = borderTop => mq({
+export const borderTop = (display: OnlyStrings) => mq({
   borderTop
 });
 
-export const borderBottom = borderBottom => mq({
+export const borderBottom = (display: OnlyStrings) => mq({
   borderBottom
 });
 
-export const borderLeft = borderLeft => mq({
+export const borderLeft = (display: OnlyStrings) => mq({
   borderLeft
 });
 
-export const borderRight = borderRight => mq({
+export const borderRight = (display: OnlyStrings) => mq({
   borderRight
 });
 
-export const borderColor = borderColor => mq({
+export const borderColor = (display: OnlyStrings) => mq({
   borderColor
 });
 
-export const left = left => mq({ left });
+export const left = (left: AllArguments) => mq({ left });
 
-export const right = right => mq({ right });
+export const right = (right: AllArguments) => mq({ right });
 
-export const top = top => mq({ top });
+export const top = (top: AllArguments) => mq({ top });
 
-export const bottom = bottom => mq({ bottom });
+export const bottom = (bottom: AllArguments) => mq({ bottom });
 
 export const noResize = css`
   resize: none;
@@ -82,7 +85,7 @@ export const sticky = css`
   position: sticky;
 `;
 
-export const zIndex = index => mq({
+export const zIndex = (index: AllArguments) => mq({
   zIndex: index
 });
 
@@ -110,19 +113,19 @@ export const floatRight = css`
   float: right;
 `;
 
-export function filterProperties (propertiesSet) {
-  return property => !propertiesSet.has(property);
+export function filterProperties (propertiesSet: any) {
+  return (property: string) => !propertiesSet.has(property);
 }
 
 export const cursorPointer = css`
   cursor: pointer;
 `;
 
-export const gridGap = gap => mq({
+export const gridGap = (gap: AllArguments) => mq({
   gridGap: gap
 });
 
-export const opacity = opacity => mq({ opacity });
+export const opacity = (opacity: AllArguments) => mq({ opacity });
 
 export function hexToRGB (hex: string, opacity: number = 1) {
   let r = 0;

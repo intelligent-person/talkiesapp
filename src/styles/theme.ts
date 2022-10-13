@@ -85,6 +85,12 @@ export const theme = {
           fontWeight: 700,
           borderRadius: '12px',
           padding: '10px 22px'
+        },
+        small: {
+          fontSize: '12px',
+          fontWeight: 700,
+          borderRadius: '6.5px',
+          padding: '6px 10px'
         }
       }
     }

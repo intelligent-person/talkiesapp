@@ -12,7 +12,7 @@ export const genresSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      return action.payload.genres;
+      return [...action.payload.genres];
     }
   }
 });

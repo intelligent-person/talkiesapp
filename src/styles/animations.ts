@@ -13,6 +13,18 @@ export const animated = css`
   }
 `;
 
+export const toLeftAnimation = keyframes`
+  from {
+    left: 0;
+    transform: translateX(0);
+  }
+  
+  to {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
+
 export const fadeInAnimation = keyframes`
   from {
     opacity: .3;

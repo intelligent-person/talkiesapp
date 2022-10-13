@@ -45,12 +45,13 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
   return (
     <Header>
       <GridRow
-        justify={'between'}
+        justify={['end', 'between']}
         align={'center'}
       >
         <GridColumn
           width={4}
-          css={ml(150)}
+          display={['none', 'block']}
+          css={ml([0, 30, 150])}
         >
           <form
             onSubmit={handleSubmit(onSearch)}
@@ -79,7 +80,7 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
           width={'auto'}
         >
           <GridRow
-            css={gridGap(60)}
+            css={gridGap([8, 10, 30])}
           >
             <GridColumn
               width={'auto'}

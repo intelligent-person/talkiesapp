@@ -19,12 +19,15 @@
       "esnext"
     ],
     "skipLibCheck": true,
-    "noEmit": true,
+    "noEmit": false,
     "incremental": true,
     "moduleResolution": "node",
     "isolatedModules": true,
     "strictNullChecks": true
   },
+  "plugins": [
+    { "transform": "ts-transformer-keys/transformer" }
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -33,6 +36,7 @@
   "exclude": [
     "node_modules",
     "next.config.js",
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "src/styles/*.ts"
   ]
 }
