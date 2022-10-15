@@ -1,9 +1,7 @@
 import { mutationType, nonNull, objectType, queryType, stringArg } from 'nexus';
 import { Context } from '../context/context';
-import { compare, hash } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
+import { hash } from 'bcryptjs';
 import { ApolloError } from 'apollo-server-micro';
-import { User } from '@prisma/client';
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -43,10 +41,7 @@ export const Mutation = mutationType({
         const password = await hash(arguments_.password, 10);
         const existUser = await context.prisma.user.findUnique({
           where: {
-            isUserExists: {
-              email: arguments_.email,
-              provider: 'email'
-            }
+            email: arguments_.email
           }
         });
         if (existUser) {
@@ -64,70 +59,9 @@ export const Mutation = mutationType({
             provider: 'email'
           }
         });
-        const token = sign({ userId: user?.id }, process.env.APP_SECRET ?? '');
-        context.setCookies('token', token);
 
         return {
-          token,
           user
-        };
-      }
-    });
-    t.field('login', {
-      type: AuthPayload,
-      args: {
-        email: nonNull(stringArg()),
-        password: nonNull(stringArg())
-      },
-      async resolve (_, arguments_, context: Context) {
-        const user: User | null = await context.prisma.user.findUnique({
-          where: {
-            isUserExists: {
-              email: arguments_.email,
-              provider: 'email'
-            }
-          }
-        });
-
-        if (!user) {
-          throw new ApolloError(
-            'No such user found',
-            '401',
-            {
-              name: 'email'
-            });
-        }
-
-        const valid = await compare(arguments_.password, user.password as string);
-        if (!valid) {
-          throw new ApolloError(
-            'Invalid password',
-            '401',
-            {
-              name: 'password'
-            });
-        }
-
-        const token = sign({ userId: user.id }, process.env.APP_SECRET ?? '');
-        context.setCookies('token', token);
-
-        return {
-          token,
-          user
-        };
-      }
-    });
-    t.field('logout', {
-      type: 'AuthPayload',
-      args: {},
-      async resolve (_, arguments_, context: Context) {
-        context.setCookies('token', '', {
-          maxAge: -1,
-          path: '/'
-        });
-        context.currentUser = null;
-        return {
-          user: null
         };
       }
     });

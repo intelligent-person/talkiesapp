@@ -1,33 +1,16 @@
 import HeaderComponent from '../components/HeaderComponent';
-import { getAuthorizedUser } from '../auth';
 import { GridRow } from 'emotion-flex-grid';
-import { wrapper } from '../store/store';
 import { SearchComponentProperties } from '../types';
 import { FC } from 'react';
 
-const Search: FC<SearchComponentProperties> = ({ currentUser }) => {
+const Search: FC<SearchComponentProperties> = () => {
   return (
     <GridRow
       direction={'column'}
     >
-      <HeaderComponent
-        currentUser={currentUser}
-      />
+      <HeaderComponent/>
     </GridRow>
   );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  () => {
-    return async ({ req }) => {
-      const currentUser = await getAuthorizedUser(req);
-
-      return {
-        props: {
-          currentUser: JSON.parse(JSON.stringify(currentUser))
-        }
-      };
-    };
-  });
 
 export default Search;

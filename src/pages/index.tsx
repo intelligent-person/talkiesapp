@@ -1,6 +1,5 @@
 import { getGenres, getTrending } from '../clientAPI/axios';
 import HeaderComponent from '../components/HeaderComponent';
-import { getAuthorizedUser } from '../auth';
 import { GridRow } from 'emotion-flex-grid';
 import TrendingComponent from '../components/TrendingComponent';
 import { css } from '@emotion/react';
@@ -10,7 +9,7 @@ import { HomeComponentProperties } from '../types';
 import { FC } from 'react';
 
 const Home: FC<HomeComponentProperties> = (props) => {
-  const { trendingFilms, currentUser } = props;
+  const { trendingFilms } = props;
   return (
     <GridRow
       direction={'column'}
@@ -19,9 +18,7 @@ const Home: FC<HomeComponentProperties> = (props) => {
         height: 100vh;
       `}
     >
-      <HeaderComponent
-        currentUser={currentUser}
-      />
+      <HeaderComponent/>
       <TrendingComponent
         trendingFilms={trendingFilms}
       />
@@ -29,18 +26,17 @@ const Home: FC<HomeComponentProperties> = (props) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
+export const getStaticProps = wrapper.getStaticProps(
   (store) => {
-    return async ({ req }) => {
-      const currentUser = await getAuthorizedUser(req);
+    return async () => {
       const { data: trendingFilms } = await getTrending('movie', 'week');
       const { data: { genres } } = await getGenres();
+
       await store.dispatch(setGenres(genres));
 
       return {
         props: {
-          trendingFilms,
-          currentUser: JSON.parse(JSON.stringify(currentUser))
+          trendingFilms
         }
       };
     };

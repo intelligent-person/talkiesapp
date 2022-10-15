@@ -20,7 +20,7 @@ model User {
   image         String?
   createdAt     DateTime       @default(now())
 
-  @@unique(fields: [email, provider], name: "isUserExists")
+  @@unique(fields: [email], name: "isUserExists")
 }
 
 //model User {

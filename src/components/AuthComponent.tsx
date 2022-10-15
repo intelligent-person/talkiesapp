@@ -3,9 +3,7 @@ import { css } from '@emotion/react';
 import { Button, display, FormGroup, gridGap, H1, H4, H6, Input, Label, mb, Nav, uppercase, width, p, flexDirection } from '../styles';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { FC, useCallback, useEffect } from 'react';
-import { errorName } from '../helpers';
-import { useRouter } from 'next/router';
+import { FC, useCallback } from 'react';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '../validation';
@@ -32,9 +30,8 @@ const captions = {
 };
 
 const AuthComponent: FC<AuthComponentProperties> = (props) => {
-  const { type = 'login', mutationError, mutation } = props;
+  const { type = 'login', mutation } = props;
 
-  const router = useRouter();
   const defaultText = captions[type];
 
   const {
@@ -49,20 +46,13 @@ const AuthComponent: FC<AuthComponentProperties> = (props) => {
     mode: 'onSubmit'
   });
 
-  const onSubmit = useCallback(({ email, password }) => {
-    mutation({
-      variables: {
-        email,
-        password
-      }
-    }).then(async () => await router.push('/'));
-  }, [router, mutation]);
-
-  useEffect(() => {
-    if (mutationError) {
-      setError(errorName(mutationError), { message: mutationError?.message });
-    }
-  }, [mutationError, setError]);
+  const onSubmit = useCallback(async ({ email, password }) => {
+    await mutation({
+      email,
+      password,
+      setError
+    });
+  }, [setError, mutation]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

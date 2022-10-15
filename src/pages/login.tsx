@@ -1,36 +1,42 @@
 import { NextPage, NextPageContext } from 'next';
-import { useAuthMutation } from '../hooks/useAuthMutation';
 import AuthComponent from '../components/AuthComponent';
-import { gql } from '@apollo/client';
-import { getAuthorizedUser } from '../auth';
-
-export const LOGIN_MUTATION = gql`
-  mutation Login($email: String!, $password: String!){
-      login(email: $email, password: $password) {
-          token
-          user {
-              id
-              name
-              email
-          }
-      }
-  }
-`;
+import { useCallback } from 'react';
+import { getSession, signIn, SignInResponse } from 'next-auth/react';
+import { errorName } from '../helpers';
+import { useRouter } from 'next/router';
 
 const LoginPage: NextPage = () => {
-  const { error, mutation } = useAuthMutation('login', LOGIN_MUTATION);
+  const router = useRouter();
+  const mutationSubmit = useCallback(async ({ email, password, setError }) => {
+    const { error, status, ok } = await signIn('credentials',
+      {
+        redirect: false,
+        email,
+        password
+      }
+    ) as SignInResponse;
+
+    if (ok) {
+      await router.push('/');
+    }
+
+    if (error) {
+      const statusCCode = error === 'No such user found' ? status : 403;
+      setError(errorName(statusCCode), { message: error });
+    }
+  }, [router]);
+
   return (
     <AuthComponent
       type={'login'}
-      mutationError={error}
-      mutation={mutation}
+      mutation={mutationSubmit}
     />
   );
 };
 
 export async function getServerSideProps (context: NextPageContext) {
   const { req } = context;
-  const currentUser = await getAuthorizedUser(req);
+  const currentUser = await getSession({ req });
 
   if (currentUser) {
     return {
