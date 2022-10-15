@@ -8,18 +8,6 @@ import { User } from '@prisma/client';
 import { compare } from 'bcryptjs';
 const exclude = prismaExclude(prisma);
 
-interface ApiErrorOptions extends ErrorOptions {
-  status?: number
-}
-
-class ApiError extends Error {
-  status: number | undefined;
-  constructor (message: string, options?: ApiErrorOptions) {
-    super(message, { cause: options?.cause });
-    this.status = options?.status;
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   providers: [
     Github({
@@ -49,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (!user) {
-            throw new ApiError('No such user found', { status: 403 });
+            throw new Error('No such user found');
           }
 
           const valid = await compare(credentials.password, user.password as string);

@@ -15,12 +15,12 @@ const TrendingComponent: FC<TrendingComponentProperties> = (props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
+    lazyLoad: true,
     speed: 500,
     autoplaySpeed: 8000,
     cssEase: 'linear',
     variableWidth: true,
     pauseOnHover: true,
-    // lazyLoad: true,
     nextArrow: <CarouselArrowComponent />,
     prevArrow: <CarouselArrowComponent isLeft />
   };
