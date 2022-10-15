@@ -1,42 +1,18 @@
 import { GridColumn, GridRow } from 'emotion-flex-grid';
-import { useAuthMutation } from '../hooks/useAuthMutation';
 import { FC, useCallback } from 'react';
-import { signOut } from 'next-auth/react';
-import { gql } from '@apollo/client';
+import { signOut, useSession } from 'next-auth/react';
 import { gridGap, Header, Input, Label, ml, Nav, SearchForm } from '../styles';
 import Link from 'next/link';
-import { HeaderComponentProperties } from '../types';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { MdAutoAwesomeMotion, MdHomeFilled, MdLogin, MdLogout } from 'react-icons/md';
 
-const LOGOUT_MUTATION = gql`
-  mutation {
-      logout {
-          user {
-              id
-          }
-      }
-  }
-`;
-
-const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
-  const { mutation } = useAuthMutation('logout', LOGOUT_MUTATION);
-  const router = useRouter();
+const HeaderComponent: FC = () => {
+  const { data } = useSession();
 
   const {
     handleSubmit,
     register
   } = useForm();
-
-  const signOutClick = useCallback(async () => {
-    if (currentUser) {
-      await (currentUser.provider === 'email'
-        ? mutation().then(() => router.reload())
-        : signOut()
-      );
-    }
-  }, [currentUser, mutation, router]);
 
   const onSearch = useCallback(async (data) => {
     console.log(data);
@@ -119,14 +95,14 @@ const HeaderComponent: FC<HeaderComponentProperties> = ({ currentUser }) => {
               </Link>
             </GridColumn>
 
-            {currentUser
+            {data?.user
               ? <GridColumn
                 width={'auto'}
               >
                 <Nav
                   tab
                   withIcon
-                  onClick={signOutClick}
+                  onClick={async () => await signOut()}
                 >
                   <span className="material-symbols-outlined">
                     logout

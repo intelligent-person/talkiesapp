@@ -1,17 +1,14 @@
-import { MoviesResponse, MovieTMDB, User } from './interfaces';
+import { MoviesResponse, MovieTMDB } from './interfaces';
+import { FieldValues, UseFormSetError } from 'react-hook-form';
 
+interface AuthMutation {
+  email: string
+  password: string
+  setError: UseFormSetError<FieldValues>
+}
 export interface AuthComponentProperties {
   type: 'login' | 'signup'
-  mutationError: any
-  mutation: any
-}
-
-export interface HeaderComponentProperties {
-  currentUser: User | null
-}
-
-export interface SearchComponentProperties {
-  currentUser: User | null
+  mutation: ({ email, password, setError }: AuthMutation) => Promise<void>
 }
 
 export interface TrendingComponentProperties {
@@ -20,7 +17,6 @@ export interface TrendingComponentProperties {
 
 export interface HomeComponentProperties {
   trendingFilms: MoviesResponse
-  currentUser: User | null
 }
 
 export interface MovieCardComponentProperties {
